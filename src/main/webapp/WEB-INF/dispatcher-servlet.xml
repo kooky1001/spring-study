@@ -8,6 +8,8 @@
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean id="/index" class="edu.web.controller.IndexController"/>
+    <bean id="/notice/list" class="edu.web.controller.notice.ListController"/>
+    <bean id="/notice/detail" class="edu.web.controller.notice.DetailController"/>
     
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/templates/"/>
