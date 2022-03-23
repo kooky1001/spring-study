@@ -15,5 +15,11 @@
 	    <artifactId>spring-webmvc</artifactId>
 	    <version>5.3.16</version>
 	</dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-api</artifactId>
+		<version>9.0.58</version>
+		<type>pom.sha512</type>
+	</dependency>
   </dependencies>
 </project>
