@@ -57,4 +57,16 @@ public class Notice {
 		return "Notice [id=" + id + ", title=" + title + ", writerId=" + writerId + ", regDate=" + regDate
 				+ ", content=" + content + ", hit=" + hit + ", files=" + files + "]";
 	}
+	public Notice() {
+	}
+	public Notice(int id, String title, String writerId, Date regDate, String content, int hit, String files) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.writerId = writerId;
+		this.regDate = regDate;
+		this.content = content;
+		this.hit = hit;
+		this.files = files;
+	}
 }
