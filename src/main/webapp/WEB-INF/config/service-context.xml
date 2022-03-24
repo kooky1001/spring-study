@@ -10,8 +10,6 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config/>
-	
-	<bean id="noticeService" class="edu.web.service.notice.NoticeService"/>
+	<context:component-scan base-package="edu.web.service"/>
 
 </beans>
