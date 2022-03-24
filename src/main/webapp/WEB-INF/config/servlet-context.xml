@@ -7,8 +7,10 @@
         http://www.springframework.org/schema/mvc
         https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <bean id="/index" class="edu.web.controller.IndexController"/>
-    <bean id="/notice/list" class="edu.web.controller.notice.ListController"/>
+	<bean id="/index" class="edu.web.controller.IndexController"/>
+    <bean id="/notice/list" class="edu.web.controller.notice.ListController">
+    	<property name="noticeService" ref="noticeService"/>
+    </bean>
     <bean id="/notice/detail" class="edu.web.controller.notice.DetailController"/>
 
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -26,4 +28,5 @@
 	</bean>
 	
 	<mvc:resources location="/static/" mapping="/**"></mvc:resources>
+	
 </beans>
