@@ -9,20 +9,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import edu.web.entity.notice.Notice;
+import edu.web.service.DBConfig;
 import edu.web.service.SSHConnection;
 
+@Service
 public class NoticeService {
 	
-	private String url = "jdbc:mysql://127.0.0.1:3306/edu";
-	private String user = "";
-	private String pwd = "";
+	private String url = DBConfig.url;
+	private String user = DBConfig.user;
+	private String pwd = DBConfig.pwd;
+	private String driver = DBConfig.driver;
 	
-	public List<Notice> getList() throws SQLException {
+	public List<Notice> getList() throws SQLException, ClassNotFoundException {
 		SSHConnection ssh = new SSHConnection();
 		ssh.connect();
 		String sql = "select * from notice"; 
-		// Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName(driver);
 		Connection conn = DriverManager.getConnection(url, user, pwd);
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);

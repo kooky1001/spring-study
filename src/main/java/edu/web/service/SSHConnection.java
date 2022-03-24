@@ -5,10 +5,10 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 public class SSHConnection {
-	private String username = "";
-	private String host = "";
-	private int port = 0;
-	private String path = "";
+	private String username = DBConfig.username;
+	private String host = DBConfig.host;
+	private int port = 22;
+	private String path = DBConfig.path;
 	
 	private Session session;
 	
@@ -24,12 +24,6 @@ public class SSHConnection {
 		} catch (JSchException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		SSHConnection ssh = new SSHConnection();
-		ssh.connect();
-		ssh.disconnect();
 	}
 	
 	public void disconnect() {
