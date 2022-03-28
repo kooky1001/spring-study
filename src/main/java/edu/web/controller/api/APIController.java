@@ -18,10 +18,10 @@ public class APIController {
 	
 	@RequestMapping("test")
 	public String test() {
-		return "test";
+		return "한글테스트";
 	}
 	
-	@RequestMapping("detail")
+	@RequestMapping(value = "detail", produces = "application/json; charset=utf8")
 	public Notice detail() throws ClassNotFoundException, SQLException {
 		Notice notice = service.getDetail("1");
 		System.out.println(notice.toString());
