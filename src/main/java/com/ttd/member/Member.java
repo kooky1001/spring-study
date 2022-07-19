@@ -1,8 +1,20 @@
-package com.ttd.user;
+package com.ttd.member;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Member {
+	
+	@Id
+	@GeneratedValue
 	private long id;
-	private String userId;
+	
+	@Column(nullable = false, length = 20)
+	private String memberId;
+	
 	private String name;
 	private String password;
 	private String email;
@@ -13,11 +25,11 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getName() {
 		return name;
@@ -40,7 +52,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userId=" + userId + ", name=" + name + ", password=" + password + ", email="
+		return "Member [id=" + id + ", memberId=" + memberId + ", name=" + name + ", password=" + password + ", email="
 				+ email + "]";
 	}
 	

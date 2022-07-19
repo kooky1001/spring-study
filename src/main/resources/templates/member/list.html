@@ -20,12 +20,12 @@
         <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-        <li><a href="/user/list" class="nav-link px-2 link-dark">About</a></li>
+        <li><a href="/member/list" class="nav-link px-2 link-dark">About</a></li>
       </ul>
 
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <a href="/user/join"><button type="button" class="btn btn-primary">Sign-up</button></a>
+        <a href="/member/join"><button type="button" class="btn btn-primary">Sign-up</button></a>
       </div>
     </header>
   </div>
@@ -38,11 +38,11 @@
 	    <div class="col">Name</div>
 	    <div class="col">Email</div>
 	  </div>
-	  <div class="row justify-content-md-center" th:each="user: ${user}">
-	    <div class="col" th:text="${user.id}">Number</div>
-	    <div class="col" th:text="${user.userId}">ID</div>
-	    <div class="col" th:text="${user.name}">Name</div>
-	    <div class="col" th:text="${user.email}">Email</div>
+	  <div class="row justify-content-md-center" th:each="member: ${member}">
+	    <div class="col" th:text="${member.id}">Number</div>
+	    <div class="col" th:text="${member.memberId}">ID</div>
+	    <div class="col" th:text="${member.name}">Name</div>
+	    <div class="col" th:text="${member.email}">Email</div>
 	  </div>
 	</div>
 	</div>

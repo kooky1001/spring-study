@@ -1,8 +1,6 @@
-package com.ttd.user;
+package com.ttd.member;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,32 +8,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/member")
+public class MemberController {
 	
-	private List<User> list = new ArrayList<User>();
+	@Autowired
+	private MemberRepository memberRepository;
 
 	@GetMapping("join")
 	public ModelAndView join() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/join");
+		mv.setViewName("member/join");
 		return mv;
 	}
 	
 	@PostMapping("join")
-	public ModelAndView create(User user) {
+	public ModelAndView create(Member member) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(user);
-		list.add(user);
-		mv.setViewName("redirect:/user/list");
+		System.out.println(member);
+		memberRepository.save(member);
+		mv.setViewName("redirect:/member/list");
 		return mv;
 	}
 
 	@GetMapping("list")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user", list);
-		mv.setViewName("user/list");
+		mv.addObject("member", memberRepository.findAll());
+		mv.setViewName("member/list");
 		return mv;
 	}
 }
