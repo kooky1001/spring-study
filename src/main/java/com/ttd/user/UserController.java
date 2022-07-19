@@ -18,7 +18,7 @@ public class UserController {
 	@GetMapping("join")
 	public ModelAndView join() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/user/join");
+		mv.setViewName("user/join");
 		return mv;
 	}
 	
@@ -35,7 +35,7 @@ public class UserController {
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", list);
-		mv.setViewName("/user/list");
+		mv.setViewName("user/list");
 		return mv;
 	}
 }
