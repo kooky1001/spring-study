@@ -1,7 +1,7 @@
-package com.ttd.member;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface MemberRepository extends JpaRepository<Member, Long> {
-
-}
+//package com.ttd.member;
+//
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//public interface MemberRepository extends JpaRepository<Member, Long> {
+//
+//}

@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/member")
 public class MemberController {
 	
-	@Autowired
-	private MemberRepository memberRepository;
+//	@Autowired
+//	private MemberRepository memberRepository;
 
 	@GetMapping("join")
 	public ModelAndView join() {
@@ -25,7 +25,7 @@ public class MemberController {
 	public ModelAndView create(Member member) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(member);
-		memberRepository.save(member);
+//		memberRepository.save(member);
 		mv.setViewName("redirect:/member/list");
 		return mv;
 	}
@@ -33,7 +33,7 @@ public class MemberController {
 	@GetMapping("list")
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("member", memberRepository.findAll());
+//		mv.addObject("member", memberRepository.findAll());
 		mv.setViewName("member/list");
 		return mv;
 	}
