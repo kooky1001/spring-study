@@ -3,16 +3,17 @@ package com.ttd.member;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Member {
 	
-//	@Id
-//	@GeneratedValue
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-//	@Column(nullable = false, length = 20)
+	@Column(nullable = false, length = 20, unique = true)
 	private String memberId;
 	
 	private String name;
