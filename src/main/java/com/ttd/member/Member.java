@@ -5,14 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class Member {
 	
-	@Id
-	@GeneratedValue
+	//@Id
+	//@GeneratedValue
 	private long id;
 	
-	@Column(nullable = false, length = 20)
+	//@Column(nullable = false, length = 20)
 	private String memberId;
 	
 	private String name;
