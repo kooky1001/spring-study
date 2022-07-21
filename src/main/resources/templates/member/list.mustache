@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,12 +38,14 @@
 	    <div class="col">Name</div>
 	    <div class="col">Email</div>
 	  </div>
-	  <div class="row justify-content-md-center" th:each="member: ${member}">
-	    <div class="col" th:text="${member.id}">Number</div>
-	    <div class="col" th:text="${member.memberId}">ID</div>
-	    <div class="col" th:text="${member.name}">Name</div>
-	    <div class="col" th:text="${member.email}">Email</div>
+	  {{#member}}
+	  <div class="row justify-content-md-center">
+	    <div class="col">{{id}}</div>
+	    <div class="col">{{memberId}}</div>
+	    <div class="col">{{name}}</div>
+	    <div class="col">{{email}}</div>
 	  </div>
+	  {{/member}}
 	</div>
 	</div>
 </body>
