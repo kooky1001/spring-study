@@ -1,0 +1,2 @@
+insert into member (member_id, name, password, email) values ('test', 'testname', 'test', 'test@test.com');
+insert into member (member_id, name, password, email) values ('pest', 'pestname', 'pest', 'pest@test.com');
