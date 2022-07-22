@@ -62,4 +62,8 @@ public class User {
 		this.password = updateUser.password;
 		this.email = updateUser.email;
 	}
+	
+	public boolean matchPassword(String password) {
+		return password.equals(this.password);
+	}
 }

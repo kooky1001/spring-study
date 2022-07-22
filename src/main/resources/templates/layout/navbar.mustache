@@ -10,27 +10,30 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user/list">List</a>
+          <a class="nav-link" href="/user/list">회원목록</a>
         </li>
       </ul>
       <ul class="navbar-nav">
+      	{{^LOGIN_USER}}
       	<li class="nav-item"> 
-			<a class="nav-link" href="/user/form">Resiter</a> 
+			<a class="nav-link" href="/user/form">회원가입</a> 
 		</li>
 		<li class="nav-item"> 
-			<a class="nav-link" href="#">Login</a> 
+			<a class="nav-link" href="/user/login">로그인</a> 
 		</li>
+		{{/LOGIN_USER}}
+		{{#LOGIN_USER}}
       	<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            회원정보
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="/user/{{id}}/update">회원정보 수정</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
           </ul>
         </li>
+        {{/LOGIN_USER}}
       </ul>
     </div>
   </div>

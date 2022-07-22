@@ -30,3 +30,4 @@ spring:
   mustache:
     servlet:
       cache: false
+      expose-session-attributes: true

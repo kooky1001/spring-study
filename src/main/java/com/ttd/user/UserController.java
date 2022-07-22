@@ -1,6 +1,6 @@
 package com.ttd.user;
 
-import java.util.Optional;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,36 +18,59 @@ public class UserController {
 	private UserRepository userRepository;
 
 	@GetMapping("form")
-	public String form() {
+	public String toCreate() {
 		return "user/form";
 	}
 	
 	@PostMapping("form")
 	public String create(User user) {
-		System.out.println(user);
 		userRepository.save(user);
 		return "redirect:/user/list";
 	}
 
 	@GetMapping("list")
-	public String list(Model model) {
+	public String toList(Model model) {
 		model.addAttribute("user", userRepository.findAll());
 		return "user/list";
 	}
 	
 	@GetMapping("{id}/update")
-	public String updateForm(Model model, @PathVariable long id) {
-		Optional<User> user = userRepository.findById(id);
-		model.addAttribute("user", user.get());
+	public String toUpdate(Model model, @PathVariable long id) {
+		User user = userRepository.findById(id).orElse(null);
+		model.addAttribute("user", user);
 		return "user/update";
 	}
 	
 	@PostMapping("{id}/update")
 	public String update(User updateUser, @PathVariable long id) {
-		Optional<User> searchUser = userRepository.findById(id);
-		User user = searchUser.get();
-		user.update(updateUser);
-		userRepository.save(user);
+		User user = userRepository.findById(id).orElse(null);
+		if (user != null) {
+			user.update(updateUser);
+			userRepository.save(user);
+		}
 		return "redirect:/user/list";
+	}
+	
+	@GetMapping("login")
+	public String toLogin() {
+		return "user/login";
+	}
+	
+	@PostMapping("login")
+	public String login(String userId, String password, HttpSession session) {
+		User user = userRepository.findByUserId(userId);
+		if (user == null) {
+			return "redirect:/user/login";
+		} else if (!user.matchPassword(password)) {
+			return "redirect:/user/login";
+		}
+		session.setAttribute("LOGIN_USER", user);
+		return "redirect:/";
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("LOGIN_USER");
+		return "redirect:/";
 	}
 }
