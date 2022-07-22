@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,33 +20,37 @@
         <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-        <li><a href="/member/list" class="nav-link px-2 link-dark">About</a></li>
+        <li><a href="/user/list" class="nav-link px-2 link-dark">About</a></li>
       </ul>
 
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <a href="/member/form"><button type="button" class="btn btn-primary">Sign-up</button></a>
+        <a href="/user/form"><button type="button" class="btn btn-primary">Sign-up</button></a>
       </div>
     </header>
   </div>
 
 	<div class="px-4 pt-5 my-5 text-left">
-		<div class="container">
-	  <div class="row justify-content-md-center">
-	    <div class="col">Number</div>
-	    <div class="col">ID</div>
-	    <div class="col">Name</div>
-	    <div class="col">Email</div>
-	  </div>
-	  {{#member}}
-	  <div class="row justify-content-md-center">
-	    <div class="col">{{id}}</div>
-	    <div class="col">{{memberId}}</div>
-	    <div class="col">{{name}}</div>
-	    <div class="col">{{email}}</div>
-	  </div>
-	  {{/member}}
-	</div>
+		<form method="post">
+			<div class="mb-3">
+				<label for="userId" class="form-label">ID</label>
+				<input type="text" class="form-control" id="userId" name="userId">
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input type="text" class="form-control" id="name" name="name">
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input type="password" class="form-control" id="password" name="password">
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email address</label> 
+				<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+				<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 	</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.ttd.member;
+package com.ttd.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,14 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Member {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(nullable = false, length = 20, unique = true)
-	private String memberId;
+	private String userId;
 	
 	private String name;
 	private String password;
@@ -26,11 +26,11 @@ public class Member {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getUserId() {
+		return userId;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getName() {
 		return name;
@@ -53,7 +53,7 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", memberId=" + memberId + ", name=" + name + ", password=" + password + ", email="
+		return "Member [id=" + id + ", userId=" + userId + ", name=" + name + ", password=" + password + ", email="
 				+ email + "]";
 	}
 	
