@@ -57,4 +57,9 @@ public class User {
 				+ email + "]";
 	}
 	
+	public void update(User updateUser) {
+		this.name = updateUser.name;
+		this.password = updateUser.password;
+		this.email = updateUser.email;
+	}
 }

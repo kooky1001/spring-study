@@ -1,20 +1,24 @@
 {{>layout/header}}
-	<div class="px-4 pt-5 my-5 text-left">
-		<div class="container">
-	  <div class="row justify-content-md-center">
-	    <div class="col">Number</div>
-	    <div class="col">ID</div>
-	    <div class="col">Name</div>
-	    <div class="col">Email</div>
-	  </div>
-	  {{#user}}
-	  <div class="row justify-content-md-center">
-	    <div class="col">{{id}}</div>
-	    <div class="col">{{userId}}</div>
-	    <div class="col">{{name}}</div>
-	    <div class="col">{{email}}</div>
-	  </div>
-	  {{/user}}
-	</div>
-	</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" class="col-2">#</th>
+      <th scope="col" class="col-2">ID</th>
+      <th scope="col" class="col-2">Name</th>
+      <th scope="col" class="col-4">Email</th>
+      <th scope="col" class="col-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  	{{#user}}
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{userId}}</td>
+      <td>{{name}}</td>
+      <td>{{email}}</td>
+      <td><a href="/user/{{id}}/update" class="btn btn-primary" role="button">Modify</a></td>
+    </tr>
+    {{/user}}
+  </tbody>
+</table>
 {{>layout/footer}}
