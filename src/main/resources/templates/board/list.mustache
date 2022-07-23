@@ -1,14 +1,14 @@
 {{>layout/header}}
 <ol class="list-group list-group-numbered">
-  {{#questions}}
+  {{#list}}
   <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
     <div class="ms-2 me-auto">
-      <div class="fw-bold">Subheading</div>
-      Content for list item
+      <div class="fw-bold">{{title}}</div>
+      {{content}}
     </div>
     <span class="badge bg-primary rounded-pill">14</span>
   </li>
-  {{/questions}}
+  {{/list}}
 </ol>
 <a href="/board/form" class="btn btn-primary pull-right m-3" role="button">질문하기</a>
 <nav aria-label="Page navigation example">
