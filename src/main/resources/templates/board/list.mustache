@@ -2,10 +2,10 @@
 <ol class="list-group list-group-numbered">
   {{#list}}
   <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
-    <div class="ms-2 me-auto">
+    <a class="ms-2 me-auto" href="/board/{{boardId}}/detail">
       <div class="fw-bold">{{title}}</div>
       {{content}}
-    </div>
+    </a>
     <span class="badge bg-primary rounded-pill">14</span>
   </li>
   {{/list}}
