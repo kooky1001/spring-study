@@ -12,7 +12,7 @@ spring:
       settings:
         web-allow-others: true
   datasource:
-    url: jdbc:h2:~/timetodo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=USER
+    url: jdbc:h2:file:./timetodo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=USER
     driver-class-name: org.h2.Driver
     username: sa
     password: 
