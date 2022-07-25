@@ -1,7 +1,5 @@
 package com.ttd.board;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +40,24 @@ public class BoardController {
 		boardRepository.save(new Board(user, title, content));
 		return "redirect:/board/list";
 	}
-	
 
 	@GetMapping("{boardId}/detail")
 	public String toDetail(@PathVariable long boardId, Model model) {
 		model.addAttribute("board", boardRepository.findById(boardId).orElse(null));
 		return "board/detail";
+	}
+	
+	@GetMapping("{boardId}/update")
+	public String toUpdate(@PathVariable long boardId, Model model) {
+		model.addAttribute("board", boardRepository.findById(boardId).orElse(null));
+		return "board/update";
+	}
+	
+	@PostMapping("{boardId}/update")
+	public String update(@PathVariable long boardId, String title, String content, HttpSession session) {
+		Board board = boardRepository.findById(boardId).orElse(null);
+		board.update(title, content);
+		boardRepository.save(board);
+		return String.format("redirect:/board/%d/detail", boardId);
 	}
 }

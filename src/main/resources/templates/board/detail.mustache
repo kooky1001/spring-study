@@ -3,13 +3,29 @@
 		{{#board}}
 		<div class="mb-3">
 			<label for="title" class="form-label">Title</label>
-			<input type="text" class="form-control" id="title" name="title" value={{title}}>
+			<h4 class="" id="title">{{title}}</h4>
 		</div>
+		<hr>
 		<div class="mb-3">
 			<label for="content" class="form-label">Content</label>
-			<textarea class="form-control" id="content" name="content" rows="5">{{content}}</textarea>
+			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 		</div>
-		<a href="/board/{{boardId}}/update" class="btn btn-primary">수정</a>
+			<div class="justify-content-end d-flex mb-2">
+			<span class="me-3">2022-07-25</span><span class="text-primary">작성자</span>
+			</div>
+		<div class="justify-content-end d-flex pb-3">
+			<a href="/board/{{boardId}}/update" class="btn btn-primary me-3">수정</a>
+			<a href="/board/{{boardId}}/delete" class="btn btn-primary">삭제</a>
+		</div>
+		<hr>
+		
+		<label for="reply" class="form-label">Reply</label>
+		<div id="reply">
+			<textarea class="form-control" rows="3"></textarea>
+			<div class="justify-content-end d-flex my-2">
+				<button class="btn btn-secondary">댓글등록</button>
+			</div>
+		</div>
 		{{/board}}
 	</div>
 {{>layout/footer}}
