@@ -1,16 +1,18 @@
 {{>layout/header}}
-<ol class="list-group list-group-numbered">
+<div class="list-group list-group-numbered">
   {{#list}}
-  <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-action">
-    <a class="ms-2 me-auto" href="/board/{{boardId}}/detail">
+  <a class="list-group-item d-flex justify-content-between align-items-start list-group-item-action"  href="/board/{{boardId}}/detail">
+    <span class="ms-2 me-auto">
       <div class="fw-bold">{{title}}</div>
       {{content}}
-    </a>
+    </span>
     <span class="badge bg-primary rounded-pill">14</span>
-  </li>
+  </a>
   {{/list}}
-</ol>
-<a href="/board/form" class="btn btn-primary pull-right m-3" role="button">질문하기</a>
+</div>
+<div class="justify-content-end d-flex">
+	<a href="/board/form" class="btn btn-primary m-3" role="button">질문하기</a>
+</div>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
