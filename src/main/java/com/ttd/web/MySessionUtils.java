@@ -6,7 +6,7 @@ import com.ttd.user.User;
 
 public class MySessionUtils {
 	public static final String USER_KEY = "LOGIN_USER";
-	public static final String MESSAGE = "message";
+	public static final String MESSAGE = "ALERT_MESSAGE";
 	
 	public static boolean isLogin(HttpSession session) {
 		Object user = session.getAttribute(USER_KEY);
