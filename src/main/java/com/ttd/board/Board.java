@@ -5,12 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.ttd.user.User;
+import com.ttd.web.BaseEntity;
 
 @Entity
-public class Board {
+public class Board extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long boardId;
@@ -18,6 +20,7 @@ public class Board {
 	@ManyToOne
 	private User user;
 	private String title;
+	@Lob
 	private String content;
 	
 	public Board() {

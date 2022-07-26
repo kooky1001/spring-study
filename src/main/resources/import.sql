@@ -1,6 +1,6 @@
-insert into user (user_id, name, password, email) values ('test', 'testname', 'test', 'test@test.com');
-insert into user (user_id, name, password, email) values ('pest', 'pestname', 'pest', 'pest@test.com');
+insert into user (user_id, name, password, email, create_at, update_at) values ('test', 'testname', 'test', 'test@test.com', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+insert into user (user_id, name, password, email, create_at, update_at) values ('pest', 'pestname', 'pest', 'pest@test.com', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
-insert into board (content, title, user_id) values ('Å×½ºÆ® ³»¿ë', 'test À¯Àú°¡ ÀÔ·ÂÇÑ °Ô½ÃÆÇ', 1);
-insert into board (content, title, user_id) values ('Å×½ºÆ® ³»¿ë2À¸·Î ±æ°Ô µÈ´Ù¸é ¾î¶°ÇÒÁö Å×½ºÆ®', 'ÂªÀº Á¦¸ñ', 2);
-insert into board (content, title, user_id) values ('Å×½ºÆ® ³»¿ë3', '±ä Á¦¸ñ', 2);
+insert into board (content, title, user_id, create_at, update_at) values ('í…ŒìŠ¤íŠ¸ ë‚´ìš©', 'test ìœ ì €ê°€ ì…ë ¥í•œ ê²Œì‹œíŒ', 1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+insert into board (content, title, user_id, create_at, update_at) values ('í…ŒìŠ¤íŠ¸ ë‚´ìš©2ìœ¼ë¡œ ê¸¸ê²Œ ëœë‹¤ë©´ ì–´ë– í• ì§€ í…ŒìŠ¤íŠ¸', 'ì§§ì€ ì œëª©', 2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+insert into board (content, title, user_id, create_at, update_at) values ('í…ŒìŠ¤íŠ¸ ë‚´ìš©3', 'ê¸´ ì œëª©', 2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
