@@ -11,7 +11,7 @@
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 		</div>
 			<div class="justify-content-end d-flex mb-2">
-			<span class="me-3">{{updateAt}}</span><span class="text-primary">{{user.name}}</span>
+				<span class="me-3">{{updateAt}}</span><strong class="text-primary">{{user.name}}</strong>
 			</div>
 		<div class="justify-content-end d-flex pb-3">
 			<a href="/board/{{boardId}}/update" class="btn btn-primary me-3">수정</a>
@@ -31,10 +31,13 @@
 			<br>
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 			<div class="justify-content-end d-flex my-2">
+				<div class="justify-content-end d-flex mb-2">
+					<span class="me-3">{{updateAt}}</span><strong class="text-secondary me-3">{{user.name}}</strong>
+				</div>
 				<a href="/board/{{boardId}}/reply/{{replyId}}/delete" class="btn btn-secondary">삭제</a>
 			</div>
 			{{/replies}}
-			{{/board}}
 		</div>
+		{{/board}}
 	</div>
 {{>layout/footer}}

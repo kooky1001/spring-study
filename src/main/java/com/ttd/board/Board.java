@@ -26,7 +26,7 @@ public class Board extends BaseEntity {
 	private String title;
 	@Lob
 	private String content;
-	@OneToMany(mappedBy = "board")
+	@OneToMany(mappedBy = "board", orphanRemoval = true)
 	private List<Reply> replies;
 	
 	public Board() {
