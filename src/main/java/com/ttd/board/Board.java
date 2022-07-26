@@ -48,4 +48,8 @@ public class Board extends BaseEntity {
 	public String toString() {
 		return "Board [boardId=" + boardId + ", user=" + user + ", title=" + title + ", content=" + content + "]";
 	}
+	
+	public boolean isSameUser(User loginUser) {
+		return this.user.equals(loginUser);
+	}
 }
