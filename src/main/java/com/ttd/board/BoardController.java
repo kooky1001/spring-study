@@ -101,7 +101,7 @@ public class BoardController {
 			return Validation.fail("로그인이 필요합니다.");
 		}
 		User loginUser = MySessionUtils.getLoginUser(session);
-		if (!board.isSameUser(loginUser) && board != null) {
+		if (board != null && !board.isSameUser(loginUser)) {
 			return Validation.fail("권한이 없습니다.");
 		}
 		return Validation.ok();

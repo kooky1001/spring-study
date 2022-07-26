@@ -1,5 +1,7 @@
 package com.ttd.board;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.ttd.reply.Reply;
 import com.ttd.user.User;
 import com.ttd.web.BaseEntity;
 
@@ -22,6 +26,8 @@ public class Board extends BaseEntity {
 	private String title;
 	@Lob
 	private String content;
+	@OneToMany(mappedBy = "board")
+	private List<Reply> replies;
 	
 	public Board() {
 	}
