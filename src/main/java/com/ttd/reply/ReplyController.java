@@ -5,10 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ttd.board.Board;
 import com.ttd.board.BoardRepository;
@@ -38,8 +40,8 @@ public class ReplyController {
 		return String.format("redirect:/board/%d/detail", boardId);
 	}
 	
-	@GetMapping("{replyId}/delete")
-	public String delete(@PathVariable long boardId, @PathVariable long replyId, String content, HttpSession session, Model model) {
+	//@GetMapping("{replyId}/delete")
+	public String delete(@PathVariable long boardId, @PathVariable long replyId, HttpSession session, Model model) {
 		Reply reply = replyRepository.findById(replyId).orElse(null);
 		Validation validation = validate(session, reply);
 		if (!validation.isValid()) {
@@ -48,6 +50,18 @@ public class ReplyController {
 		}
 		replyRepository.delete(reply);
 		return String.format("redirect:/board/%d/detail", boardId);
+	}
+	
+	@ResponseBody
+	@DeleteMapping("{replyId}/delete")
+	public Validation deleteApi(@PathVariable long boardId, @PathVariable long replyId, HttpSession session) {
+		Reply reply = replyRepository.findById(replyId).orElse(null);
+		Validation validation = validate(session, reply);
+		if (!validation.isValid()) {
+			return validation;
+		}
+		replyRepository.delete(reply);
+		return validation;
 	}
 	
 	private Validation validate(HttpSession session) {

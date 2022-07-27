@@ -29,15 +29,41 @@
 			</form>
 			{{#replies}}
 			<br>
+			<div class="replyBox">
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 			<div class="justify-content-end d-flex my-2">
 				<div class="justify-content-end d-flex mb-2">
 					<span class="me-3">{{updateAt}}</span><strong class="text-secondary me-3">{{user.name}}</strong>
 				</div>
-				<a href="/board/{{boardId}}/reply/{{replyId}}/delete" class="btn btn-secondary">삭제</a>
+				<a href="/board/{{boardId}}/reply/{{replyId}}/delete" class="btn btn-secondary deleteBtn">삭제</a>
+			</div>
 			</div>
 			{{/replies}}
 		</div>
 		{{/board}}
 	</div>
+	<script>
+		$(document).ready(()=>{
+			$("a.deleteBtn").click((e)=>{
+				e.preventDefault();
+				var deleteBtn = e.target;
+				var url = e.target.getAttribute("href");
+				$.ajax({
+					type: "delete",
+					url: url,
+					dataType: "json",
+					error: (request, status, error) => {
+						alert(status);
+					},
+					success: (data) => {
+						if (!data.valid){
+							alert(data.message);
+						} else {
+							$(deleteBtn).closest("div.replyBox").remove();
+						}
+					}
+				})
+			});
+		});
+	</script>
 {{>layout/footer}}
