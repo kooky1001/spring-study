@@ -21,7 +21,7 @@
 		
 		<label for="reply" class="form-label">Reply</label>
 		<div id="reply">
-			<form method="post" action="/board/{{boardId}}/reply/create">
+			<form method="post" action="/board/{{boardId}}/reply/create" name="replyForm">
 				<textarea class="form-control" rows="3" name="content"></textarea>
 				<div class="justify-content-end d-flex my-2">
 					<button class="btn btn-secondary">댓글등록</button>
@@ -43,27 +43,30 @@
 		{{/board}}
 	</div>
 	<script>
-		$(document).ready(()=>{
-			$("a.deleteBtn").click((e)=>{
-				e.preventDefault();
-				var deleteBtn = e.target;
-				var url = e.target.getAttribute("href");
-				$.ajax({
-					type: "delete",
-					url: url,
-					dataType: "json",
-					error: (request, status, error) => {
-						alert(status);
-					},
-					success: (data) => {
-						if (!data.valid){
-							alert(data.message);
-						} else {
-							$(deleteBtn).closest("div.replyBox").remove();
-						}
+		$("a.deleteBtn").click((e)=>{
+			e.preventDefault();
+			var deleteBtn = e.target;
+			var url = e.target.getAttribute("href");
+			$.ajax({
+				type: "delete",
+				url: url,
+				dataType: "json",
+				error: (request, status, error) => {
+					alert(status);
+				},
+				success: (data) => {
+					if (!data.valid){
+						alert(data.message);
+					} else {
+						$(deleteBtn).closest("div.replyBox").remove();
 					}
-				})
-			});
+				}
+			})
+		});
+		
+		$("form[name='replyForm'").find("button").click((e)=>{
+			e.preventDefault();
+			alert("test")
 		});
 	</script>
 {{>layout/footer}}

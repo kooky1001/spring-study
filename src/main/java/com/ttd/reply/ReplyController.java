@@ -27,7 +27,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyRepository replyRepository;
 	
-	@PostMapping("create")
+	//@PostMapping("create")
 	public String create(@PathVariable long boardId, String content, HttpSession session, Model model) {
 		Validation validation = validate(session);
 		if (!validation.isValid()) {
@@ -38,6 +38,17 @@ public class ReplyController {
 		Board board = boardRepository.findById(boardId).orElse(null);
 		replyRepository.save(new Reply(user, board, content));
 		return String.format("redirect:/board/%d/detail", boardId);
+	}
+	
+	@PostMapping("create")
+	public Reply createApi(@PathVariable long boardId, String content, HttpSession session) {
+		Validation validation = validate(session);
+		if (!validation.isValid()) {
+			return null;
+		}
+		User user = MySessionUtils.getLoginUser(session);
+		Board board = boardRepository.findById(boardId).orElse(null);
+		return replyRepository.save(new Reply(user, board, content));
 	}
 	
 	//@GetMapping("{replyId}/delete")
