@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button name="test">버튼</button>
+	<button name="add">버튼+</button>
+	<div id="divId"></div>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script>
+	  $("button[name='test']").click(function () {
+	    $.ajax({
+	    	url: "test",
+	    	type: "get",
+	    	success: function(data){
+	    		console.log(data);
+	    		alert(JSON.stringify(data));
+	    	},
+	    	error: function(reqest, status, error){
+	    		alert(error);
+	    	}
+	    });
+	  });
+		$(document).ready(function () {
+		  $("button[name=add]").click(() => {
+			  for (i=0; i<4; i++) {
+				  $("#divId").append($("<button name='added'>++</button>").attr("sort", i));
+			  }
+		  });
+		  
+		  $(document).on("click", "button[name='added']", function() {
+			  //alert("Test")
+			  alert($(this).attr("sort"));
+			});
+		});
+	</script>
+</body>
+</html>
