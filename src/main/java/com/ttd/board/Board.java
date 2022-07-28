@@ -41,6 +41,19 @@ public class Board extends BaseEntity {
 		this.content = content;
 	}
 	
+	public long getBoardId() {
+		return boardId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public String getContent() {
+		return content;
+	}
+	
 	public void update(Board updateBoard) {
 		this.title = updateBoard.title;
 		this.content = updateBoard.content;

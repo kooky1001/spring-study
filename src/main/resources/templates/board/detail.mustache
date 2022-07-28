@@ -28,8 +28,8 @@
 				</div>
 			</form>
 			{{#replies}}
-			<br>
 			<div class="replyBox">
+			<br>
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 			<div class="justify-content-end d-flex my-2">
 				<div class="justify-content-end d-flex mb-2">
@@ -43,7 +43,8 @@
 		{{/board}}
 	</div>
 	<script>
-		$("a.deleteBtn").click((e)=>{
+		$(document).on("click", "a.deleteBtn", (e) => {
+		//$("a.deleteBtn").click((e)=>{
 			e.preventDefault();
 			var deleteBtn = e.target;
 			var url = e.target.getAttribute("href");
@@ -66,7 +67,42 @@
 		
 		$("form[name='replyForm'").find("button").click((e)=>{
 			e.preventDefault();
-			alert("test")
+			var form = $("form[name='replyForm']");
+			var queryString = form.serialize();
+			var url = form.attr("action");
+			$.ajax({
+				type: "post",
+				url: url,
+				data: queryString,
+				error: (request, status, error) => {
+					alert(status);
+				},
+				success: (data, status) => {
+					if(data === '' || data === undefined) {
+						alert("Sorry! It's failed");
+						return;
+					}
+					//var replyTemplate = $("#replyTemplate").html();
+					var template = makeTemplate(data.content, data.updateAt, data.user.name, data.board.boardId, data.replyId);
+					$("#reply").append(template);
+					$("form[name='replyForm']").find("textarea[name='content']").val('');
+				}
+			});
 		});
+		
+		function makeTemplate(content, updateAt, username, boardId, replyId) {
+			let template = 
+				`<div class="replyBox">
+				<br>
+				<p class="border rounded px-2 py-2 pb-5" id="content">${content}</p>
+				<div class="justify-content-end d-flex my-2">
+					<div class="justify-content-end d-flex mb-2">
+						<span class="me-3">${updateAt}</span><strong class="text-secondary me-3">${username}</strong>
+					</div>
+					<a href="/board/${boardId}/reply/${replyId}/delete" class="btn btn-secondary deleteBtn">삭제</a>
+				</div>
+				</div>`
+			return template;
+		}
 	</script>
 {{>layout/footer}}

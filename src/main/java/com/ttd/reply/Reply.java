@@ -34,6 +34,19 @@ public class Reply extends BaseEntity {
 		this.content = content;
 	}
 	
+	public long getReplyId() {
+		return replyId;
+	}
+	public User getUser() {
+		return user;
+	}
+	public Board getBoard() {
+		return board;
+	}
+	public String getContent() {
+		return content;
+	}
+	
 	public boolean isSameUser(User loginUser) {
 		return loginUser.equals(this.user);
 	}

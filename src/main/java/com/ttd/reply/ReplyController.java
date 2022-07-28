@@ -40,6 +40,7 @@ public class ReplyController {
 		return String.format("redirect:/board/%d/detail", boardId);
 	}
 	
+	@ResponseBody
 	@PostMapping("create")
 	public Reply createApi(@PathVariable long boardId, String content, HttpSession session) {
 		Validation validation = validate(session);

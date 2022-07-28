@@ -11,15 +11,20 @@
 	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script>
 	  $("button[name='test']").click(function () {
+// 		  fetch("test", {method:"get"}).then(
+// 			function(res){
+// 				res.json()
+// 			}
+// 		  ).then((data) => console.log(data));
 	    $.ajax({
 	    	url: "test",
 	    	type: "get",
-	    	success: function(data){
+	    	success: data => {
 	    		console.log(data);
 	    		alert(JSON.stringify(data));
 	    	},
-	    	error: function(reqest, status, error){
-	    		alert(error);
+	    	error: (reqest, status, error) => {
+	    		alert(status);
 	    	}
 	    });
 	  });
