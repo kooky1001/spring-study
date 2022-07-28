@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ttd.board.Board;
 import com.ttd.board.BoardRepository;
 import com.ttd.user.User;
-import com.ttd.web.MySessionUtils;
+import com.ttd.web.CustomUtils;
 import com.ttd.web.Validation;
 
 @Controller
@@ -31,10 +31,10 @@ public class ReplyController {
 	public String create(@PathVariable long boardId, String content, HttpSession session, Model model) {
 		Validation validation = validate(session);
 		if (!validation.isValid()) {
-			model.addAttribute(MySessionUtils.MESSAGE, validation.getMessage());
+			model.addAttribute(CustomUtils.MESSAGE, validation.getMessage());
 			return "user/login";
 		}
-		User user = MySessionUtils.getLoginUser(session);
+		User user = CustomUtils.getLoginUser(session);
 		Board board = boardRepository.findById(boardId).orElse(null);
 		replyRepository.save(new Reply(user, board, content));
 		return String.format("redirect:/board/%d/detail", boardId);
@@ -47,7 +47,7 @@ public class ReplyController {
 		if (!validation.isValid()) {
 			return null;
 		}
-		User user = MySessionUtils.getLoginUser(session);
+		User user = CustomUtils.getLoginUser(session);
 		Board board = boardRepository.findById(boardId).orElse(null);
 		return replyRepository.save(new Reply(user, board, content));
 	}
@@ -57,7 +57,7 @@ public class ReplyController {
 		Reply reply = replyRepository.findById(replyId).orElse(null);
 		Validation validation = validate(session, reply);
 		if (!validation.isValid()) {
-			model.addAttribute(MySessionUtils.MESSAGE, validation.getMessage());
+			model.addAttribute(CustomUtils.MESSAGE, validation.getMessage());
 			return "user/login";
 		}
 		replyRepository.delete(reply);
@@ -80,10 +80,10 @@ public class ReplyController {
 		return validate(session, null);
 	}
 	private Validation validate(HttpSession session, Reply reply) {
-		if (!MySessionUtils.isLogin(session)) {
+		if (!CustomUtils.isLogin(session)) {
 			return Validation.fail("로그인이 필요합니다.");
 		}
-		User loginUser = MySessionUtils.getLoginUser(session);
+		User loginUser = CustomUtils.getLoginUser(session);
 		if (reply != null && !reply.isSameUser(loginUser)) {
 			return Validation.fail("권한이 없습니다.");
 		}

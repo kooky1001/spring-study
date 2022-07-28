@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ttd.web.MySessionUtils;
+import com.ttd.web.CustomUtils;
 
 @Controller
 @RequestMapping("/user")
@@ -38,10 +38,10 @@ public class UserController {
 	
 	@GetMapping("{id}/update")
 	public String toUpdate(@PathVariable long id, Model model, HttpSession session) {
-		if (!MySessionUtils.isLogin(session)) {
+		if (!CustomUtils.isLogin(session)) {
 			return "redirect:/user/login";
 		}
-		User loginUser = MySessionUtils.getLoginUser(session);
+		User loginUser = CustomUtils.getLoginUser(session);
 		if (!loginUser.matchId(id)) {
 			throw new IllegalStateException("You approached it through an illegal way.");
 		}
@@ -53,10 +53,10 @@ public class UserController {
 	
 	@PostMapping("{id}/update")
 	public String update(@PathVariable long id, User updateUser, HttpSession session) {
-		if (!MySessionUtils.isLogin(session)) {
+		if (!CustomUtils.isLogin(session)) {
 			return "redirect:/user/login";
 		}
-		User loginUser = MySessionUtils.getLoginUser(session);
+		User loginUser = CustomUtils.getLoginUser(session);
 		if (!loginUser.matchId(id)) {
 			throw new IllegalStateException("You approached it through an illegal way.");
 		}
@@ -82,13 +82,13 @@ public class UserController {
 		} else if (!user.matchPassword(password)) {
 			return "redirect:/user/login";
 		}
-		session.setAttribute(MySessionUtils.USER_KEY, user);
+		session.setAttribute(CustomUtils.USER_KEY, user);
 		return "redirect:/";
 	}
 	
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute(MySessionUtils.USER_KEY);
+		session.removeAttribute(CustomUtils.USER_KEY);
 		return "redirect:/";
 	}
 }
