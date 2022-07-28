@@ -19,7 +19,7 @@ import com.ttd.web.CustomUtils;
 import com.ttd.web.Validation;
 
 @Controller
-@RequestMapping("/board/{boardId}/reply")
+@RequestMapping("/board/{id}/reply")
 public class ReplyController {
 
 	@Autowired
@@ -42,13 +42,13 @@ public class ReplyController {
 	
 	@ResponseBody
 	@PostMapping("create")
-	public Reply createApi(@PathVariable long boardId, String content, HttpSession session) {
+	public Reply createApi(@PathVariable long id, String content, HttpSession session) {
 		Validation validation = validate(session);
 		if (!validation.isValid()) {
 			return null;
 		}
 		User user = CustomUtils.getLoginUser(session);
-		Board board = boardRepository.findById(boardId).orElse(null);
+		Board board = boardRepository.findById(id).orElse(null);
 		return replyRepository.save(new Reply(user, board, content));
 	}
 	
@@ -66,7 +66,7 @@ public class ReplyController {
 	
 	@ResponseBody
 	@DeleteMapping("{replyId}/delete")
-	public Validation deleteApi(@PathVariable long boardId, @PathVariable long replyId, HttpSession session) {
+	public Validation deleteApi(@PathVariable long id, @PathVariable long replyId, HttpSession session) {
 		Reply reply = replyRepository.findById(replyId).orElse(null);
 		Validation validation = validate(session, reply);
 		if (!validation.isValid()) {

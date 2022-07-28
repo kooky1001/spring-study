@@ -11,17 +11,17 @@
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 		</div>
 			<div class="justify-content-end d-flex mb-2">
-				<span class="me-3">{{updateAt}}</span><strong class="text-primary">{{user.name}}</strong>
+				<span class="me-3">{{updateDate}}</span><strong class="text-primary">{{user.name}}</strong>
 			</div>
 		<div class="justify-content-end d-flex pb-3">
-			<a href="/board/{{boardId}}/update" class="btn btn-primary me-3">수정</a>
-			<a href="/board/{{boardId}}/delete" class="btn btn-primary">삭제</a>
+			<a href="/board/{{id}}/update" class="btn btn-primary me-3">수정</a>
+			<a href="/board/{{id}}/delete" class="btn btn-primary">삭제</a>
 		</div>
 		<hr>
 		
 		<label for="reply" class="form-label">Reply</label>
 		<div id="reply">
-			<form method="post" action="/board/{{boardId}}/reply/create" name="replyForm">
+			<form method="post" action="/board/{{id}}/reply/create" name="replyForm">
 				<textarea class="form-control" rows="3" name="content"></textarea>
 				<div class="justify-content-end d-flex my-2">
 					<button class="btn btn-secondary">댓글등록</button>
@@ -33,9 +33,9 @@
 			<p class="border rounded px-2 py-2 pb-5" id="content">{{content}}</p>
 			<div class="justify-content-end d-flex my-2">
 				<div class="justify-content-end d-flex mb-2">
-					<span class="me-3">{{updateAt}}</span><strong class="text-secondary me-3">{{user.name}}</strong>
+					<span class="me-3">{{updateDate}}</span><strong class="text-secondary me-3">{{user.name}}</strong>
 				</div>
-				<a href="/board/{{boardId}}/reply/{{replyId}}/delete" class="btn btn-secondary deleteBtn">삭제</a>
+				<a href="/board/{{board.id}}/reply/{{id}}/delete" class="btn btn-secondary deleteBtn">삭제</a>
 			</div>
 			</div>
 			{{/replies}}
@@ -83,21 +83,21 @@
 						return;
 					}
 					//var replyTemplate = $("#replyTemplate").html();
-					var template = makeTemplate(data.content, data.updateAt, data.user.name, data.board.boardId, data.replyId);
+					var template = makeTemplate(data.content, data.updateDate, data.user.name, data.board.id, data.id);
 					$("#reply").append(template);
 					$("form[name='replyForm']").find("textarea[name='content']").val('');
 				}
 			});
 		});
 		
-		function makeTemplate(content, updateAt, username, boardId, replyId) {
+		function makeTemplate(content, updateDate, username, boardId, replyId) {
 			let template = 
 				`<div class="replyBox">
 				<br>
 				<p class="border rounded px-2 py-2 pb-5" id="content">${content}</p>
 				<div class="justify-content-end d-flex my-2">
 					<div class="justify-content-end d-flex mb-2">
-						<span class="me-3">${updateAt}</span><strong class="text-secondary me-3">${username}</strong>
+						<span class="me-3">${updateDate}</span><strong class="text-secondary me-3">${username}</strong>
 					</div>
 					<a href="/board/${boardId}/reply/${replyId}/delete" class="btn btn-secondary deleteBtn">삭제</a>
 				</div>

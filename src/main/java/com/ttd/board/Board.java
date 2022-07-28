@@ -17,9 +17,6 @@ import com.ttd.web.BaseEntity;
 
 @Entity
 public class Board extends BaseEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long boardId;
 	@JoinColumn
 	@ManyToOne
 	private User user;
@@ -41,9 +38,6 @@ public class Board extends BaseEntity {
 		this.content = content;
 	}
 	
-	public long getBoardId() {
-		return boardId;
-	}
 	public User getUser() {
 		return user;
 	}
@@ -65,7 +59,7 @@ public class Board extends BaseEntity {
 	
 	@Override
 	public String toString() {
-		return "Board [boardId=" + boardId + ", user=" + user + ", title=" + title + ", content=" + content + "]";
+		return "Board [boardId=" + super.getId() + ", user=" + user + ", title=" + title + ", content=" + content + "]";
 	}
 	
 	public boolean isSameUser(User loginUser) {

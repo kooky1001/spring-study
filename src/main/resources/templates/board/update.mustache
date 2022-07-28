@@ -1,7 +1,7 @@
 {{>layout/header}}
 	<div class="px-5 text-left">
 		{{#board}}
-		<form method="post" action="/board/{{boardId}}/update">
+		<form method="post" action="/board/{{id}}/update">
 			<div class="mb-3">
 				<label for="title" class="form-label">Title</label>
 				<input type="text" class="form-control" id="title" name="title" value="{{title}}">

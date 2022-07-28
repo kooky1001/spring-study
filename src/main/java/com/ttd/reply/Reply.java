@@ -13,9 +13,6 @@ import com.ttd.web.BaseEntity;
 
 @Entity
 public class Reply extends BaseEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long replyId;
 	@ManyToOne
 	private User user;
 	@ManyToOne
@@ -24,7 +21,7 @@ public class Reply extends BaseEntity {
 	private String content;
 	@Override
 	public String toString() {
-		return "Reply [replyId=" + replyId + ", user=" + user + ", board=" + board + ", content=" + content + "]";
+		return "Reply [replyId=" + super.getId() + ", user=" + user + ", board=" + board + ", content=" + content + "]";
 	}
 	public Reply() {
 	}
@@ -34,9 +31,6 @@ public class Reply extends BaseEntity {
 		this.content = content;
 	}
 	
-	public long getReplyId() {
-		return replyId;
-	}
 	public User getUser() {
 		return user;
 	}

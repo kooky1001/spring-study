@@ -49,15 +49,15 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 
-	@GetMapping("{boardId}/detail")
-	public String toDetail(@PathVariable long boardId, Model model) {
-		model.addAttribute("board", boardRepository.findById(boardId).orElse(null));
+	@GetMapping("{id}/detail")
+	public String toDetail(@PathVariable long id, Model model) {
+		model.addAttribute("board", boardRepository.findById(id).orElse(null));
 		return "board/detail";
 	}
 	
-	@GetMapping("{boardId}/update")
-	public String toUpdate(@PathVariable long boardId, Model model, HttpSession session) {
-		Board board =  boardRepository.findById(boardId).orElse(null);
+	@GetMapping("{id}/update")
+	public String toUpdate(@PathVariable long id, Model model, HttpSession session) {
+		Board board =  boardRepository.findById(id).orElse(null);
 		Validation validation = validate(session, board);
 		if (!validation.isValid()) {
 			model.addAttribute(CustomUtils.MESSAGE, validation.getMessage());
@@ -67,9 +67,9 @@ public class BoardController {
 		return "board/update";
 	}
 	
-	@PostMapping("{boardId}/update")
-	public String update(@PathVariable long boardId, String title, String content, HttpSession session, Model model) {
-		Board board = boardRepository.findById(boardId).orElse(null);
+	@PostMapping("{id}/update")
+	public String update(@PathVariable long id, String title, String content, HttpSession session, Model model) {
+		Board board = boardRepository.findById(id).orElse(null);
 		Validation validation = validate(session, board);
 		if (!validation.isValid()) {
 			model.addAttribute(CustomUtils.MESSAGE, validation.getMessage());
@@ -77,12 +77,12 @@ public class BoardController {
 		}
 		board.update(title, content);
 		boardRepository.save(board);
-		return String.format("redirect:/board/%d/detail", boardId);
+		return String.format("redirect:/board/%d/detail", id);
 	}
 
-	@GetMapping("{boardId}/delete")
-	public String delete(@PathVariable long boardId, HttpSession session, Model model) {
-		Board board = boardRepository.findById(boardId).orElse(null);
+	@GetMapping("{id}/delete")
+	public String delete(@PathVariable long id, HttpSession session, Model model) {
+		Board board = boardRepository.findById(id).orElse(null);
 		Validation validation = validate(session, board);
 		if (!validation.isValid()) {
 			model.addAttribute(CustomUtils.MESSAGE, validation.getMessage());
