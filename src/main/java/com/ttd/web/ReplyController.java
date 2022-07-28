@@ -1,4 +1,4 @@
-package com.ttd.reply;
+package com.ttd.web;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ttd.board.Board;
-import com.ttd.board.BoardRepository;
-import com.ttd.user.User;
-import com.ttd.web.CustomUtils;
-import com.ttd.web.Validation;
+import com.ttd.domain.Board;
+import com.ttd.domain.BoardRepository;
+import com.ttd.domain.Reply;
+import com.ttd.domain.ReplyRepository;
+import com.ttd.domain.User;
+import com.ttd.domain.Validation;
 
 @Controller
 @RequestMapping("/board/{id}/reply")

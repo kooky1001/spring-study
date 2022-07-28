@@ -1,4 +1,4 @@
-package com.ttd.reply;
+package com.ttd.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

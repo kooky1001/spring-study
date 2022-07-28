@@ -1,4 +1,4 @@
-package com.ttd.board;
+package com.ttd.domain;
 
 import java.util.List;
 
@@ -10,10 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.ttd.reply.Reply;
-import com.ttd.user.User;
-import com.ttd.web.BaseEntity;
 
 @Entity
 public class Board extends BaseEntity {

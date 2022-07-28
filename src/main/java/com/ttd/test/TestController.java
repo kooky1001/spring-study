@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ttd.user.User;
-import com.ttd.user.UserRepository;
+import com.ttd.domain.User;
+import com.ttd.domain.UserRepository;
 
 @RestController
 public class TestController {

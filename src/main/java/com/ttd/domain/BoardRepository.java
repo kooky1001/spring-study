@@ -1,4 +1,4 @@
-package com.ttd.board;
+package com.ttd.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -2,7 +2,7 @@ package com.ttd.web;
 
 import javax.servlet.http.HttpSession;
 
-import com.ttd.user.User;
+import com.ttd.domain.User;
 
 public class CustomUtils {
 	public static final String USER_KEY = "LOGIN_USER";

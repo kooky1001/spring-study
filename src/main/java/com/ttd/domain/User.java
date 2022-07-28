@@ -1,9 +1,7 @@
-package com.ttd.user;
+package com.ttd.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import com.ttd.web.BaseEntity;
 
 @Entity
 public class User extends BaseEntity {

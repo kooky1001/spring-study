@@ -1,4 +1,4 @@
-package com.ttd.web;
+package com.ttd.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,8 +14,6 @@ import javax.persistence.MappedSuperclass;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.ttd.user.User;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
