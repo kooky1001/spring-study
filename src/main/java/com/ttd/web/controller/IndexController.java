@@ -1,4 +1,4 @@
-package com.ttd.web;
+package com.ttd.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

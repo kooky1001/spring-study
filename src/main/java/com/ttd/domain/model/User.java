@@ -1,4 +1,4 @@
-package com.ttd.domain;
+package com.ttd.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
