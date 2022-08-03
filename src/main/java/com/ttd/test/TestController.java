@@ -1,5 +1,8 @@
 package com.ttd.test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +27,10 @@ public class TestController {
 	}
 	
 	@GetMapping("/test2")
-	public String hello2() {
-		return "hello2~";
+	public Map<String, String> hello2() {
+		Map<String, String> map = new HashMap<>();
+		map.put("name", "testname");
+		map.put("age", "28");
+		return map;
 	}
 }
