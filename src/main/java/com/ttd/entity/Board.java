@@ -1,4 +1,4 @@
-package com.ttd.domain.model;
+package com.ttd.entity;
 
 import java.util.List;
 

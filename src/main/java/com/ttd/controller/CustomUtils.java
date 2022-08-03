@@ -1,8 +1,8 @@
-package com.ttd.web.controller;
+package com.ttd.controller;
 
 import javax.servlet.http.HttpSession;
 
-import com.ttd.domain.model.User;
+import com.ttd.entity.User;
 
 public class CustomUtils {
 	public static final String USER_KEY = "LOGIN_USER";

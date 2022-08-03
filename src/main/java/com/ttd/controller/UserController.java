@@ -1,4 +1,4 @@
-package com.ttd.web.controller;
+package com.ttd.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ttd.domain.model.User;
-import com.ttd.domain.repository.UserRepository;
+import com.ttd.entity.User;
+import com.ttd.service.UserRepository;
 
 @Controller
 @RequestMapping("/user")

@@ -1,4 +1,4 @@
-package com.ttd.domain.model;
+package com.ttd.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

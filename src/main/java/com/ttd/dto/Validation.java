@@ -1,4 +1,4 @@
-package com.ttd.domain.model;
+package com.ttd.dto;
 
 public class Validation {
 	private boolean valid;

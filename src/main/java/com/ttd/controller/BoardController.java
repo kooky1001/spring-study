@@ -1,4 +1,4 @@
-package com.ttd.web.controller;
+package com.ttd.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ttd.domain.model.Board;
-import com.ttd.domain.model.User;
-import com.ttd.domain.model.Validation;
-import com.ttd.domain.repository.BoardRepository;
+import com.ttd.dto.Validation;
+import com.ttd.entity.Board;
+import com.ttd.entity.User;
+import com.ttd.service.BoardRepository;
 
 @Controller
 @RequestMapping("/board")
