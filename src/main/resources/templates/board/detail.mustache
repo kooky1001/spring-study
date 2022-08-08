@@ -65,6 +65,7 @@
 			})
 		});
 		
+		/**
 		$("form[name='replyForm'").find("button").click((e)=>{
 			e.preventDefault();
 			var form = $("form[name='replyForm']");
@@ -82,13 +83,13 @@
 						alert("Sorry! It's failed");
 						return;
 					}
-					//var replyTemplate = $("#replyTemplate").html();
 					var template = makeTemplate(data.content, data.updateDate, data.user.name, data.board.id, data.id);
 					$("#reply").append(template);
 					$("form[name='replyForm']").find("textarea[name='content']").val('');
 				}
 			});
 		});
+		*/
 		
 		function makeTemplate(content, updateDate, username, boardId, replyId) {
 			let template = 
@@ -105,4 +106,5 @@
 			return template;
 		}
 	</script>
+	<script src="/js/board.js" />
 {{>layout/footer}}
