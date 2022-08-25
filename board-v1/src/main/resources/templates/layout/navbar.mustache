@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">TimeToDo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/board/list">게시판</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/list">회원목록</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+      	{{^LOGIN_USER}}
+      	<li class="nav-item"> 
+			<a class="nav-link" href="/user/form">회원가입</a> 
+		</li>
+		<li class="nav-item"> 
+			<a class="nav-link" href="/user/login">로그인</a> 
+		</li>
+		{{/LOGIN_USER}}
+		{{#LOGIN_USER}}
+      	<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            회원정보
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/{{id}}/update">회원정보 수정</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
+          </ul>
+        </li>
+        {{/LOGIN_USER}}
+      </ul>
+    </div>
+  </div>
+</nav>

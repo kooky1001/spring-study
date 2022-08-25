@@ -1,0 +1,25 @@
+{{>layout/header}}
+<div class="list-group list-group-numbered">
+  {{#list}}
+  <a class="list-group-item d-flex justify-content-between align-items-start list-group-item-action"  href="/board/{{id}}/detail">
+    <span class="ms-2 me-auto">
+      <div class="fw-bold">{{title}}</div>
+      <small class="text-primary">{{user.name}}</small> <small class="text-secondary">{{updateDate}}</small><br>
+    </span>
+    <span class="badge bg-primary rounded-pill">14</span>
+  </a>
+  {{/list}}
+</div>
+<div class="justify-content-end d-flex">
+	<a href="/board/form" class="btn btn-primary m-3" role="button">질문하기</a>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+  </ul>
+</nav>
+{{>layout/footer}}

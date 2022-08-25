@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button name="test">버튼</button>
+	<button name="add">버튼+</button>
+	<div id="divId"></div>
+	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script>
+		document.querySelector("button[name='test']").onclick = function(){
+			fetch('/test2')
+			  .then((res) => res.json())
+			  .then((data) => {
+				  console.log(data);
+				  alert(JSON.stringify(data));
+			});
+		};
+		
+// 	    $.ajax({
+// 	    	url: "test",
+// 	    	type: "get",
+// 	    	success: data => {
+// 	    		console.log(data);
+// 	    		alert(JSON.stringify(data));
+// 	    	},
+// 	    	error: (reqest, status, error) => {
+// 	    		alert(status);
+// 	    	}
+// 	    });
+// 	  });
+
+		document.querySelector("button[name='add']").onclick = function(e){
+			for (let i=0; i<4; i++) {
+				const newBtn = document.createElement("button");
+				newBtn.name = "added";
+				newBtn.sort = i;
+				newBtn.innerHTML = "++";
+				document.querySelector("#divId").appendChild(newBtn);
+			}
+		}
+		
+		document.addEventListener("click", (e) => {
+			let _this = e.target;
+			if (_this && _this.name === "added") {
+				alert(_this.sort);
+			}
+		});
+		
+// 		$(document).ready(function () {
+// 		  $("button[name=add]").click(() => {
+// 			  for (i=0; i<4; i++) {
+// 				  $("#divId").append($("<button name='added'>++</button>").attr("sort", i));
+// 			  }
+// 		  });
+		  
+// 		  $(document).on("click", "button[name='added']", function() {
+// 			  //alert("Test")
+// 			  alert($(this).attr("sort"));
+// 			});
+// 		});
+
+	</script>
+</body>
+</html>

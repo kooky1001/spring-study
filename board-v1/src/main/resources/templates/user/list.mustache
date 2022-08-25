@@ -1,0 +1,24 @@
+{{>layout/header}}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col" class="col-2">#</th>
+      <th scope="col" class="col-2">ID</th>
+      <th scope="col" class="col-2">Name</th>
+      <th scope="col" class="col-4">Email</th>
+      <th scope="col" class="col-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  	{{#user}}
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{userId}}</td>
+      <td>{{name}}</td>
+      <td>{{email}}</td>
+      <td><a href="/user/{{id}}/update" class="btn btn-primary" role="button">Modify</a></td>
+    </tr>
+    {{/user}}
+  </tbody>
+</table>
+{{>layout/footer}}

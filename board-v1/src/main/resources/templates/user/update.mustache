@@ -1,0 +1,26 @@
+{{>layout/header}}
+	<div class="px-5 text-left">
+		{{#user}}
+		<form method="post" action="/user/{{id}}/update">
+			<div class="mb-3">
+				<label for="userId" class="form-label">ID</label>
+				<input type="text" class="form-control" id="userId" name="userId" value="{{userId}}" readonly="readonly">
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input type="text" class="form-control" id="name" name="name" value="{{name}}">
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input type="password" class="form-control" id="password" name="password" value="{{password}}">
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email address</label> 
+				<input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" value="{{email}}">
+				<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		{{/user}}
+	</div>
+{{>layout/footer}}
