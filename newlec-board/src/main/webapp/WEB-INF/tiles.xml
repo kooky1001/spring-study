@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="root.*" template="/WEB-INF/templates/inc/layout.jsp">
+    <put-attribute name="title" value="코딩 전문가를 만들기 위한 온라인 강의 시스템" />
+    <put-attribute name="header" value="/WEB-INF/templates/inc/header.jsp" />
+    <put-attribute name="body" value="/WEB-INF/templates/{1}.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/templates/inc/footer.jsp" />
+  </definition>
+  <definition name="notice.*" template="/WEB-INF/templates/customer/inc/layout.jsp">
+    <put-attribute name="title" value="공지사항" />
+    <put-attribute name="header" value="/WEB-INF/templates/inc/header.jsp" />
+    <put-attribute name="visual" value="/WEB-INF/templates/customer/inc/visual.jsp" />
+    <put-attribute name="aside" value="/WEB-INF/templates/customer/inc/aside.jsp" />
+    <put-attribute name="body" value="/WEB-INF/templates/customer/notice/{1}.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/templates/inc/footer.jsp" />
+  </definition>
+</tiles-definitions>
