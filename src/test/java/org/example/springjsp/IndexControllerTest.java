@@ -6,23 +6,21 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class IndexControllerTest {
 
-    @LocalServerPort
-    int port;
+	@LocalServerPort
+	int port;
 
-    @Test
-    void index() throws Exception {
+	@Test
+	void index() throws Exception {
 
-        TestRestTemplate restTemplate = new TestRestTemplate();
+		TestRestTemplate restTemplate = new TestRestTemplate();
 
-        ResponseEntity<String> entity = restTemplate.getForEntity("/click/test", String.class);
+		ResponseEntity<String> entity = restTemplate.getForEntity("/click/test", String.class);
 
-        String testContent = entity.toString();
-        System.out.println("testContent = " + testContent);
+		String testContent = entity.toString();
+		System.out.println("testContent = " + testContent);
 
-    }
+	}
 }
