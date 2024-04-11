@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.example.springjsp.domain.board.BoardMapper">
+    <select id="findAll" resultType="org.example.springjsp.domain.board.Board">
+        SELECT id, title, content, author, updateAt
+        FROM board
+    </select>
+
+    <insert id="save" parameterType="org.example.springjsp.domain.board.Board" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into board(content, author, createAt, updateAt)
+        values(
+        #{content}
+        ,#{author}
+        , sysdate
+        , sysdate
+        )
+        <!--        <selectKey keyColumn="id" keyProperty="id" resultType="org.example.springjsp.board.Board" order="AFTER">-->
+        <!--            SELECT id, content from board where id=#{id}-->
+        <!--        </selectKey>-->
+    </insert>
+
+    <select id="findById" resultType="org.example.springjsp.domain.board.Board" parameterType="Long">
+        select id, title, content, author, updateAt
+        from board
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterType="Map">
+        update board
+        set content=#{board.content}
+          , updateAt=sysdate
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete
+        from board
+        where id = #{id}
+    </delete>
+</mapper>
+
+
+        <!--    Board update(Long id, Board updateParam);-->
