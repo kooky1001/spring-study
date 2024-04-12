@@ -2,6 +2,7 @@ package org.example.springjsp.domain.board;
 
 import java.util.List;
 
+import org.example.springjsp.domain.board.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 
 import org.example.springjsp.domain.board.Board;
-import org.example.springjsp.domain.board.BoardRepository;
+import org.example.springjsp.domain.board.repository.BoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

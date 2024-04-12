@@ -1,4 +1,4 @@
-package org.example.springjsp;
+package org.example.springjsp.web;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

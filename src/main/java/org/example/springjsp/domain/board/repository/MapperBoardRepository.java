@@ -1,8 +1,9 @@
-package org.example.springjsp.domain.board;
+package org.example.springjsp.domain.board.repository;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.example.springjsp.domain.board.Board;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
