@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:include page="layout/header.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 <article>
     <h2>글 수정하기</h2>
     <div class="grid">
@@ -22,4 +22,4 @@
 <a href="/board/${board.id}">
     <button>뒤로가기</button>
 </a>
-<jsp:include page="layout/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/footer.jsp"/>

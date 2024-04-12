@@ -1,4 +1,4 @@
-package org.example.springjsp.domain.board;
+package org.example.springjsp.domain.board.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.example.springjsp.domain.board.Board;
 import org.springframework.stereotype.Repository;
 
 @Repository

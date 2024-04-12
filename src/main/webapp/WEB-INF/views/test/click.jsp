@@ -1,16 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="layout/header.jsp" />
+<jsp:include page="../layout/header.jsp"/>
 
 <h2>Hi~ ${name}</h2>
 <img src="/cookie.jpg" width="50%">
-<br />
-<hr />
+<br/>
+<hr/>
 <button class="btn" id="get">get</button>
 <button class="btn" id="post">post</button>
 <button class="btn" id="put">put</button>
 <button class="btn" id="delete">delete</button>
-<br />
-<br />
+<br/>
+<br/>
 <input type="text" id="output">
 
 <script>
@@ -60,4 +60,4 @@
     })
 </script>
 
-<jsp:include page="layout/footer.jsp" />
+<jsp:include page="../layout/footer.jsp"/>

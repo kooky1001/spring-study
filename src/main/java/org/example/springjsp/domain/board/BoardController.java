@@ -21,7 +21,7 @@ public class BoardController {
 	public String detail(@PathVariable("id") Long id, Model model) {
 		Board board = boardService.findOne(id);
 		model.addAttribute("board", board);
-		return "board-detail";
+		return "board/board-detail";
 	}
 
 	@PostMapping
@@ -35,7 +35,7 @@ public class BoardController {
 	public String updatePage(@PathVariable("id") Long id, Model model) {
 		Board board = boardService.findOne(id);
 		model.addAttribute("board", board);
-		return "board-update";
+		return "board/board-update";
 	}
 
 	//    @PutMapping("/{id}/update")

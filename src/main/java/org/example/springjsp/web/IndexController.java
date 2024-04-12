@@ -1,4 +1,4 @@
-package org.example.springjsp;
+package org.example.springjsp.web;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class IndexController {
 	public String click(Model model, @PathVariable(value = "name", required = false) String name) {
 		System.out.println("name = " + name);
 		model.addAttribute("name", name);
-		return "click";
+		return "test/click";
 	}
 
 }

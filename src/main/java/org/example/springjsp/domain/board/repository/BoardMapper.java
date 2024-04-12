@@ -1,10 +1,11 @@
-package org.example.springjsp.domain.board;
+package org.example.springjsp.domain.board.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.example.springjsp.domain.board.Board;
 
 @Mapper
 public interface BoardMapper {
