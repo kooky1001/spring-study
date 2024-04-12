@@ -27,7 +27,6 @@ public class MapperBoardRepository implements BoardRepository {
 	@Override
 	public List<Board> findAll() {
 		List<Board> boardList = boardMapper.findAll();
-		log.info("list=", boardList);
 		return boardList;
 	}
 
