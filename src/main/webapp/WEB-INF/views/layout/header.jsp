@@ -15,10 +15,12 @@
         <ul>
             <li>
                 <a href="/todolist">
-                    <button>To-do List</button>
+                    To-do List
                 </a>
+            </li>
+            <li>
                 <a href="/click/cookie">
-                    <button>Test page</button>
+                    Test page
                 </a>
             </li>
         </ul>
