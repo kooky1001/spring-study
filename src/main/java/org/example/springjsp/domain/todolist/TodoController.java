@@ -39,7 +39,7 @@ public class TodoController {
 	}
 
 	@ResponseBody
-	@PutMapping("list/checked")
+	@PutMapping("checked")
 	public Todo check(@RequestParam Long id, @RequestParam Boolean completed) {
 		return todoService.check(id, completed);
 	}

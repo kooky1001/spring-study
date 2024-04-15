@@ -111,7 +111,7 @@
 
     function check(id, checked) {
         $.ajax({
-            url: "todolist/list/checked",
+            url: "todolist/checked",
             method: "put",
             data: {id: id, completed: checked},
             success: (data) => {
