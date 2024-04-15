@@ -5,7 +5,7 @@
 <article>
     <div class="grid">
         <h2>할 일</h2>
-        <input type="date" name="date" id="date">
+        <input type="date" name="toDate" id="toDate">
     </div>
     <hr/>
     <fieldset role="group">
@@ -23,12 +23,12 @@
 
 <script>
     $(document).ready(() => {
-        $("#date").change(() => {
-            let date = $("#date").val();
-            findAll(date);
+        $("#toDate").change(() => {
+            let toDate = $("#toDate").val();
+            findAll(toDate);
         });
 
-        $("#date").val(new Date().toJSON().slice(0, 10));
+        $("#toDate").val(new Date().toJSON().slice(0, 10));
         findAll();
 
         $("#list").on('change', "input[name='complete']", (e) => {
@@ -88,7 +88,7 @@
     }
 
     function save() {
-        let date = $("#date").val();
+        let toDate = $("#toDate").val();
         let content = $("#content").val();
 
         if (!content) {
@@ -98,7 +98,7 @@
         $.ajax({
             url: "todolist",
             method: "post",
-            data: {content: content, date: date},
+            data: {content: content, toDate: toDate},
             success: (data) => {
                 findAll();
                 $("#content").val("");
@@ -109,14 +109,14 @@
         });
     }
 
-    function findAll(date) {
-        if (!date) {
-            date = $("#date").val();
+    function findAll(toDate) {
+        if (!toDate) {
+            toDate = $("#toDate").val();
         }
         $.ajax({
             url: "todolist/list",
             method: "get",
-            data: {date: date},
+            data: {toDate: toDate},
             success: (data) => {
                 initList(data);
             },

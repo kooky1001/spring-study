@@ -23,8 +23,8 @@ public class MemoryTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAll(LocalDate date) {
-		return store.values().stream().filter(todo -> todo.getDate().isEqual(date)).collect(Collectors.toList());
+	public List<Todo> findAll(LocalDate toDate) {
+		return store.values().stream().filter(todo -> todo.getToDate().isEqual(toDate)).collect(Collectors.toList());
 	}
 
 	@Override

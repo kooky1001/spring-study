@@ -35,8 +35,8 @@ public class TodoController {
 
 	@ResponseBody
 	@GetMapping("list")
-	public List<Todo> list(@RequestParam LocalDate date) {
-		return todoService.findAll(date);
+	public List<Todo> list(@RequestParam LocalDate toDate) {
+		return todoService.findAll(toDate);
 	}
 
 	@ResponseBody
