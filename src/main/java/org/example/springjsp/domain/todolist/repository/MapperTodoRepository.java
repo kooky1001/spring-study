@@ -1,9 +1,10 @@
-package org.example.springjsp.domain.todolist;
+package org.example.springjsp.domain.todolist.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.example.springjsp.domain.todolist.Todo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
