@@ -39,4 +39,8 @@ public class MemoryTodoRepository implements TodoRepository {
 		return todo.getId();
 	}
 
+	public void clear() {
+		store.clear();
+	}
+
 }
