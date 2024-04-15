@@ -9,6 +9,11 @@
     </div>
     <hr/>
     <fieldset role="group">
+        <select id="category" style="width: 30%">
+            <c:forEach var="category" items="${categoryList}">
+                <option value="${category}">${category.description}</option>
+            </c:forEach>
+        </select>
         <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>
         <input type="submit" value="등록" onclick="save()"/>
     </fieldset>
@@ -25,11 +30,11 @@
     $(document).ready(() => {
         $("#toDate").change(() => {
             let toDate = $("#toDate").val();
-            findAll(toDate);
+            findAllByDate(toDate);
         });
 
         $("#toDate").val(new Date().toJSON().slice(0, 10));
-        findAll();
+        findAllByDate();
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
@@ -106,7 +111,7 @@
             method: "post",
             data: {content: content, toDate: toDate},
             success: (data) => {
-                findAll();
+                findAllByDate();
                 $("#content").val("");
                 alert("등록되었습니다.")
             }, error: (err) => {
@@ -115,7 +120,7 @@
         });
     }
 
-    function findAll(toDate) {
+    function findAllByDate(toDate) {
         if (!toDate) {
             toDate = $("#toDate").val();
         }
@@ -138,7 +143,7 @@
             method: "put",
             data: {id: id, completed: checked},
             success: (data) => {
-                findAll();
+                findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
@@ -152,7 +157,7 @@
             method: "delete",
             data: {id: id},
             success: (data) => {
-                findAll();
+                findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
@@ -166,7 +171,7 @@
             method: "put",
             data: {id: id, content: content},
             success: (data) => {
-                findAll();
+                findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
