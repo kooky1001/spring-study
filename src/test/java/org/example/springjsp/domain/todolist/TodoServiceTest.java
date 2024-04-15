@@ -16,7 +16,7 @@ class TodoServiceTest {
 	private TodoService todoService;
 
 	@Test
-	void 목록조회() {
+	void list() {
 
 		Todo todo = Todo.builder()
 			.content("test")
@@ -32,7 +32,7 @@ class TodoServiceTest {
 	}
 
 	@Test
-	void 저장() {
+	void save() {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
@@ -46,7 +46,7 @@ class TodoServiceTest {
 	}
 
 	@Test
-	void 체크() {
+	void check() {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
@@ -62,7 +62,7 @@ class TodoServiceTest {
 	}
 
 	@Test
-	void 삭제() {
+	void delete() {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
@@ -77,7 +77,7 @@ class TodoServiceTest {
 	}
 
 	@Test
-	void 업데이트() {
+	void update() {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)

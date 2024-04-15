@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.example.springjsp.domain.todolist.repository.MemoryTodoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class MemoryTodoRepositoryTest {
 	}
 
 	@Test
-	void 저장테스트() {
+	void save() {
 		String content = "테스트 할일";
 		Todo todo = Todo.builder().content(content)
 			.date(LocalDate.now())
@@ -32,7 +33,7 @@ class MemoryTodoRepositoryTest {
 	}
 
 	@Test
-	void 목록() {
+	void list() {
 		String content = "테스트 할일";
 		Todo todo = Todo.builder().content(content)
 			.date(LocalDate.now())
