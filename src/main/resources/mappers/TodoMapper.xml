@@ -8,6 +8,7 @@
         SELECT id, content, completed, toDate
         FROM todo
         where toDate = #{toDate}
+        order by completed asc, id asc;
     </select>
 
     <insert id="save" parameterType="org.example.springjsp.domain.todolist.Todo" useGeneratedKeys="true"
