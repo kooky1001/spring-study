@@ -1,9 +1,10 @@
 package org.example.springjsp.domain.todolist;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,8 @@ public class MemoryTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAll() {
-		return new ArrayList<>(store.values());
+	public List<Todo> findAll(LocalDate date) {
+		return store.values().stream().filter(todo -> todo.getDate().isEqual(date)).collect(Collectors.toList());
 	}
 
 	@Override
