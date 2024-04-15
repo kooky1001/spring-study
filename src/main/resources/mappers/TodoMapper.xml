@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.example.springjsp.domain.todolist.TodoMapper">
+    <select id="findAll" resultType="org.example.springjsp.domain.todolist.Todo" parameterType="java.time.LocalDate">
+        SELECT id, content, completed, toDate
+        FROM todo
+        where toDate = #{toDate}
+    </select>
+
+    <insert id="save" parameterType="org.example.springjsp.domain.todolist.Todo" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into todo(content, completed, toDate)
+        values (#{content},
+                #{completed}
+                   , #{toDate})
+    </insert>
+
+    <select id="findById" resultType="org.example.springjsp.domain.todolist.Todo" parameterType="Long">
+        select id, content, completed, toDate
+        from todo
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterType="Map">
+        update todo
+        set content   = #{todo.content},
+            completed = #{todo.completed}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete
+        from todo
+        where id = #{id}
+    </delete>
+</mapper>

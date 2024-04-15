@@ -18,7 +18,7 @@ public class Todo {
 	private Long id;
 	private String content;
 	private boolean completed;
-	private LocalDate date;
+	private LocalDate toDate;
 	//	private LocalDateTime createdDate;
 	//	private LocalDateTime modifiedDate;
 
@@ -26,6 +26,6 @@ public class Todo {
 	public Todo(String content, boolean completed, LocalDate date) {
 		this.content = content;
 		this.completed = completed;
-		this.date = date;
+		this.toDate = date;
 	}
 }
