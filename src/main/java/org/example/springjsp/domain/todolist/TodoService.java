@@ -49,4 +49,13 @@ public class TodoService {
 	public Todo update(Long id, Todo updateParam) {
 		return todoRepository.update(id, updateParam);
 	}
+
+	public Todo check(Long id, boolean completed) {
+		Todo todo = findById(id);
+		Todo updateParam = Todo.builder()
+			.content(todo.getContent())
+			.completed(completed)
+			.build();
+		return todoRepository.update(id, updateParam);
+	}
 }

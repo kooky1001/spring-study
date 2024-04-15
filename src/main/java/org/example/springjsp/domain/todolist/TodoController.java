@@ -41,11 +41,6 @@ public class TodoController {
 	@ResponseBody
 	@PutMapping("list/checked")
 	public Todo check(@RequestParam Long id, @RequestParam Boolean completed) {
-		Todo todo = todoService.findById(id);
-		Todo updateParam = Todo.builder()
-			.content(todo.getContent())
-			.completed(completed)
-			.build();
-		return todoService.update(id, updateParam);
+		return todoService.check(id, completed);
 	}
 }

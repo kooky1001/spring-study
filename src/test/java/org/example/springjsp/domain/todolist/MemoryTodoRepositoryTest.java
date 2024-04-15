@@ -1,16 +1,14 @@
-package org.example.springjsp.domain.board.repository;
+package org.example.springjsp.domain.todolist;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.example.springjsp.domain.todolist.MemoryTodoRepository;
-import org.example.springjsp.domain.todolist.Todo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-class MemoryBoardRepositoryTest {
+class MemoryTodoRepositoryTest {
 
 	MemoryTodoRepository memoryTodoRepository = new MemoryTodoRepository();
 
@@ -43,7 +41,7 @@ class MemoryBoardRepositoryTest {
 
 		Todo savedTodo = memoryTodoRepository.save(todo);
 
-		List<Todo> list = memoryTodoRepository.findAll();
+		List<Todo> list = memoryTodoRepository.findAll(LocalDate.now());
 		System.out.println(list);
 		assertThat(list).contains(todo);
 	}
