@@ -8,80 +8,99 @@
         <input type="date" name="date" id="date">
     </div>
     <hr/>
-    <form method="post">
-        <fieldset role="group">
-            <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>
-            <input type="submit" value="등록"/>
-        </fieldset>
-    </form>
+    <fieldset role="group">
+        <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>
+        <input type="submit" value="등록" onclick="save()"/>
+    </fieldset>
 </article>
 
 <article>
     <h2>목록</h2>
     <hr/>
-    <div>
-        <nav>
-            <ul>
-                <li><label><input type="checkbox">해야할 일 3</label></li>
-            </ul>
-            <ul>
-                <li>
-                    <button>수정</button>
-                </li>
-                <li>
-                    <button>삭제</button>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        <nav>
-            <ul>
-                <li><label><input type="checkbox" checked/><s>해야할 일 4</s></label></li>
-            </ul>
-            <ul>
-                <li>
-                    <button>수정</button>
-                </li>
-                <li>
-                    <button>삭제</button>
-                </li>
-            </ul>
-        </nav>
+    <div id="list">
     </div>
 </article>
 
 <script>
     $(document).ready(() => {
-        $("#date").val(new Date().toJSON().slice(0, 10));
-
-        $("form").submit((event) => {
-            event.preventDefault();
-            let form = {content: $("#content").val()}
+        $("#date").change(() => {
+            let date = $("#date").val();
+            findAll(date);
         });
 
+        $("#date").val(new Date().toJSON().slice(0, 10));
         findAll();
+
     })
 
-    function initList(data) {
-        $("#selectList").clear();
-        for (var i = 0; i < date.length; i++) {
-            let nav = $("<nav></nav>").html("test");
-            $("#selectList").append("<li></li>");
+    function initList(list) {
+        $("#list").empty();
+        for (let item of list) {
+            let todoItem = '';
+            if (item.completed) {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="completed" checked/><s>\${item.content}</s></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            } else {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="completed">\${item.content}</label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            }
+            $("#list").append(todoItem);
         }
     }
 
-    function findAll() {
+    function save() {
+        let date = $("#date").val();
+        let content = $("#content").val();
+
+        if (!content) {
+            return;
+        }
+
+        $.ajax({
+            url: "todolist",
+            method: "post",
+            data: {content: content, date: date},
+            success: (data) => {
+                findAll();
+                $("#content").val("");
+                alert("등록되었습니다.")
+            }, error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
+
+    function findAll(date) {
+        if (!date) {
+            date = $("#date").val();
+        }
         $.ajax({
             url: "todolist/list",
             method: "get",
+            data: {date: date},
             success: (data) => {
-                alert(data);
+                initList(data);
             },
             error: (err) => {
-                alert(err);
+                alert(err.toString());
             }
-        })
+        });
     }
 </script>
 

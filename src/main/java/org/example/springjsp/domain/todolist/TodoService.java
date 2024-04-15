@@ -19,21 +19,26 @@ public class TodoService {
 		Todo todo1 = Todo.builder()
 			.content("해야할일 1")
 			.completed(false)
-			.date(LocalDate.of(2024, 4, 14)).build();
+			.date(LocalDate.of(2024, 4, 15)).build();
 		Todo todo2 = Todo.builder()
 			.content("해야할일 2")
 			.completed(false)
 			.date(LocalDate.of(2024, 4, 14)).build();
+		Todo todo3 = Todo.builder()
+			.content("해야할일 3")
+			.completed(true)
+			.date(LocalDate.of(2024, 4, 15)).build();
 
 		todoRepository.save(todo1);
 		todoRepository.save(todo2);
+		todoRepository.save(todo3);
 	}
 
 	public Todo save(Todo todo) {
 		return todoRepository.save(todo);
 	}
 
-	public List<Todo> findAll() {
-		return todoRepository.findAll();
+	public List<Todo> findAll(LocalDate date) {
+		return todoRepository.findAll(date);
 	}
 }

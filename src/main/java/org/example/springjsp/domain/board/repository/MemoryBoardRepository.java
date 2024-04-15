@@ -15,12 +15,6 @@ public class MemoryBoardRepository implements BoardRepository {
 	private static final Map<Long, Board> store = new HashMap<>();
 	private static Long sequence = 0L;
 
-	//    @PostConstruct
-	//    public void init() {
-	//        this.save(Board.builder().content("test1").build());
-	//        this.save(Board.builder().content("test2").build());
-	//    }
-
 	@Override
 	public Board save(Board board) {
 		board.setId(++sequence);
