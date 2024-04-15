@@ -41,4 +41,12 @@ public class TodoService {
 	public List<Todo> findAll(LocalDate date) {
 		return todoRepository.findAll(date);
 	}
+
+	public Todo findById(Long id) {
+		return todoRepository.findById(id).orElse(null);
+	}
+
+	public Todo update(Long id, Todo updateParam) {
+		return todoRepository.update(id, updateParam);
+	}
 }

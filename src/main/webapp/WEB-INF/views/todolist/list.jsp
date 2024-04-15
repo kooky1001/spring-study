@@ -31,6 +31,12 @@
         $("#date").val(new Date().toJSON().slice(0, 10));
         findAll();
 
+        $("#list").on('change', "input[name='complete']", (e) => {
+            let item = e.target.closest(".todoItem");
+            let id = $(item).children("input:hidden").val();
+            let checked = e.target.checked;
+            check(id, checked);
+        });
     })
 
     function initList(list) {
@@ -41,7 +47,7 @@
                 todoItem = `<nav class="todoItem">
                                 <input type="hidden" name="id" value="\${item.id}"/>
                                 <ul>
-                                    <li><label><input type="checkbox" name="completed" checked/><s>\${item.content}</s></label></li>
+                                    <li><label><input type="checkbox" name="complete" checked/><s>\${item.content}</s></label></li>
                                 </ul>
                                 <ul>
                                     <li><button class="updateBtn">수정</button></li>
@@ -52,7 +58,7 @@
                 todoItem = `<nav class="todoItem">
                                 <input type="hidden" name="id" value="\${item.id}"/>
                                 <ul>
-                                    <li><label><input type="checkbox" name="completed">\${item.content}</label></li>
+                                    <li><label><input type="checkbox" name="complete">\${item.content}</label></li>
                                 </ul>
                                 <ul>
                                     <li><button class="updateBtn">수정</button></li>
@@ -102,6 +108,22 @@
             }
         });
     }
+
+    function check(id, checked) {
+        $.ajax({
+            url: "todolist/list/checked",
+            method: "put",
+            data: {id: id, completed: checked},
+            success: (data) => {
+                findAll();
+            },
+            error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
+
+
 </script>
 
 <jsp:include page="/WEB-INF/views/layout/footer.jsp"/>

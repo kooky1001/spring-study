@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,5 +36,16 @@ public class TodoController {
 	@GetMapping("list")
 	public List<Todo> list(@RequestParam LocalDate date) {
 		return todoService.findAll(date);
+	}
+
+	@ResponseBody
+	@PutMapping("list/checked")
+	public Todo check(@RequestParam Long id, @RequestParam Boolean completed) {
+		Todo todo = todoService.findById(id);
+		Todo updateParam = Todo.builder()
+			.content(todo.getContent())
+			.completed(completed)
+			.build();
+		return todoService.update(id, updateParam);
 	}
 }

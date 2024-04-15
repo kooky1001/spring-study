@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
@@ -38,6 +39,11 @@ public class MemoryTodoRepository implements TodoRepository {
 	public Long delete(Todo todo) {
 		store.remove(todo.getId());
 		return todo.getId();
+	}
+
+	@Override
+	public Optional<Todo> findById(Long id) {
+		return Optional.of(store.get(id));
 	}
 
 	public void clear() {
