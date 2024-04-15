@@ -15,5 +15,7 @@ create table todo
     content   varchar(255),
     completed boolean,
     toDate    date,
+    category  enum('work', 'personal', 'other'),
     primary key (id)
 );
+

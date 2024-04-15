@@ -32,13 +32,21 @@ public class TodoController {
 	@ResponseBody
 	@PostMapping
 	public Todo save(@ModelAttribute Todo todo) {
+		System.out.println("todo = " + todo);
 		return todoService.save(todo);
+	}
+
+	// 날짜별 조회
+	@ResponseBody
+	// @GetMapping("list")
+	public List<Todo> listByDate(@RequestParam LocalDate toDate) {
+		return todoService.findAll(toDate);
 	}
 
 	@ResponseBody
 	@GetMapping("list")
-	public List<Todo> list(@RequestParam LocalDate toDate) {
-		return todoService.findAll(toDate);
+	public List<Todo> listByCategory(@RequestParam Category category) {
+		return todoService.findAllByCategory(category);
 	}
 
 	@ResponseBody

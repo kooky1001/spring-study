@@ -11,16 +11,25 @@
         order by completed asc, id asc;
     </select>
 
+    <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.Todo"
+            parameterType="org.example.springjsp.domain.todolist.Category">
+        SELECT id, content, completed, toDate, category
+        FROM todo
+        where category = #{category}
+        order by completed asc, id asc;
+    </select>
+
     <insert id="save" parameterType="org.example.springjsp.domain.todolist.Todo" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
-        insert into todo(content, completed, toDate)
+        insert into todo(content, completed, toDate, category)
         values (#{content},
-                #{completed}
-                   , #{toDate})
+                #{completed},
+                #{toDate},
+                #{category})
     </insert>
 
     <select id="findById" resultType="org.example.springjsp.domain.todolist.Todo" parameterType="Long">
-        select id, content, completed, toDate
+        select id, content, completed, toDate, category
         from todo
         where id = #{id}
     </select>

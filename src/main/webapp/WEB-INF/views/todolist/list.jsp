@@ -5,7 +5,7 @@
 <article>
     <div class="grid">
         <h2>할 일</h2>
-        <input type="date" name="toDate" id="toDate">
+        <%--        <input type="date" name="toDate" id="toDate">--%>
     </div>
     <hr/>
     <fieldset role="group">
@@ -28,6 +28,7 @@
 
 <script>
     $(document).ready(() => {
+        /* date로 구분
         $("#toDate").change(() => {
             let toDate = $("#toDate").val();
             findAllByDate(toDate);
@@ -35,6 +36,7 @@
 
         $("#toDate").val(new Date().toJSON().slice(0, 10));
         findAllByDate();
+        */
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
@@ -101,6 +103,7 @@
     function save() {
         let toDate = $("#toDate").val();
         let content = $("#content").val();
+        let category = $("#category").val();
 
         if (!content) {
             return;
@@ -109,9 +112,9 @@
         $.ajax({
             url: "todolist",
             method: "post",
-            data: {content: content, toDate: toDate},
+            data: {content: content, toDate: toDate, category: category},
             success: (data) => {
-                findAllByDate();
+                // findAllByDate();
                 $("#content").val("");
                 alert("등록되었습니다.")
             }, error: (err) => {
