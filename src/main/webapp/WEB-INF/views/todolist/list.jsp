@@ -37,6 +37,14 @@
             let checked = e.target.checked;
             check(id, checked);
         });
+
+        $("#list").on('click', ".deleteBtn", (e) => {
+            let item = e.target.closest(".todoItem");
+            let id = $(item).children("input:hidden").val();
+            if (confirm("삭제하시겠습니까?")) {
+                deleteTodo(id);
+            }
+        });
     })
 
     function initList(list) {
@@ -123,6 +131,19 @@
         });
     }
 
+    function deleteTodo(id, checked) {
+        $.ajax({
+            url: "todolist",
+            method: "delete",
+            data: {id: id},
+            success: (data) => {
+                findAll();
+            },
+            error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
 
 </script>
 

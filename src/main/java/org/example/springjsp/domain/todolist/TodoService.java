@@ -58,4 +58,9 @@ public class TodoService {
 			.build();
 		return todoRepository.update(id, updateParam);
 	}
+
+	public Long delete(Long id) {
+		Todo todo = findById(id);
+		return todoRepository.delete(todo);
+	}
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,4 +44,11 @@ public class TodoController {
 	public Todo check(@RequestParam Long id, @RequestParam Boolean completed) {
 		return todoService.check(id, completed);
 	}
+
+	@ResponseBody
+	@DeleteMapping
+	public Long delete(@RequestParam Long id) {
+		return todoService.delete(id);
+	}
+
 }

@@ -60,4 +60,19 @@ class TodoServiceTest {
 		assertThat(true).isEqualTo(findTodo.isCompleted());
 	}
 
+	@Test
+	void 삭제() {
+		Todo todo = Todo.builder()
+			.content("test")
+			.completed(false)
+			.date(LocalDate.now())
+			.build();
+		Todo savedTodo = todoService.save(todo);
+
+		todoService.delete(savedTodo.getId());
+		List<Todo> list = todoService.findAll(LocalDate.now());
+
+		assertThat(list).doesNotContain(savedTodo);
+	}
+
 }
