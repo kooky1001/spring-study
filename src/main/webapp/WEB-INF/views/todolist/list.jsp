@@ -33,14 +33,14 @@
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
-            let id = $(item).children("input:hidden").val();
-            let checked = e.target.checked;
+            let id = $(item).find("input[name='id']").val();
+            let checked = $(item).find("input:checkbox").is(":checked");
             check(id, checked);
         });
 
         $("#list").on('click', ".deleteBtn", (e) => {
             let item = e.target.closest(".todoItem");
-            let id = $(item).children("input:hidden").val();
+            let id = $(item).find("input[name='id']").val();
             if (confirm("삭제하시겠습니까?")) {
                 deleteTodo(id);
             }
@@ -48,8 +48,14 @@
 
         $("#list").on('click', ".updateBtn", (e) => {
             let item = e.target.closest(".todoItem");
-            let id = $(item).children("input:hidden").val();
-            let content = prompt("수정할 내용을 입력해주세요.");
+            let checked = $(item).find("input:checkbox").is(":checked");
+            if (checked) {
+                alert("완료된 항목은 수정할 수 없습니다.");
+                return;
+            }
+            let id = $(item).find("input[name='id']").val();
+            let todoContent = $(item).find(".todoContent").html();
+            let content = prompt("수정할 내용을 입력해주세요.", todoContent);
             if (content) {
                 updateTodo(id, content);
             }
@@ -64,7 +70,7 @@
                 todoItem = `<nav class="todoItem">
                                 <input type="hidden" name="id" value="\${item.id}"/>
                                 <ul>
-                                    <li><label><input type="checkbox" name="complete" checked/><s>\${item.content}</s></label></li>
+                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
                                 </ul>
                                 <ul>
                                     <li><button class="updateBtn">수정</button></li>
@@ -75,7 +81,7 @@
                 todoItem = `<nav class="todoItem">
                                 <input type="hidden" name="id" value="\${item.id}"/>
                                 <ul>
-                                    <li><label><input type="checkbox" name="complete">\${item.content}</label></li>
+                                    <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
                                 </ul>
                                 <ul>
                                     <li><button class="updateBtn">수정</button></li>
