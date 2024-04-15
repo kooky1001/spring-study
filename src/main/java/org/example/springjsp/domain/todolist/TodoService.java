@@ -46,7 +46,13 @@ public class TodoService {
 		return todoRepository.findById(id).orElse(null);
 	}
 
-	public Todo update(Long id, Todo updateParam) {
+	public Todo update(Long id, String content) {
+		Todo todo = findById(id);
+		Todo updateParam = Todo.builder()
+			.content(content)
+			.date(todo.getDate())
+			.completed(todo.isCompleted())
+			.build();
 		return todoRepository.update(id, updateParam);
 	}
 
@@ -57,5 +63,10 @@ public class TodoService {
 			.completed(completed)
 			.build();
 		return todoRepository.update(id, updateParam);
+	}
+
+	public Long delete(Long id) {
+		Todo todo = findById(id);
+		return todoRepository.delete(todo);
 	}
 }
