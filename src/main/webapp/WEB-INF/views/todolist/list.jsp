@@ -45,6 +45,15 @@
                 deleteTodo(id);
             }
         });
+
+        $("#list").on('click', ".updateBtn", (e) => {
+            let item = e.target.closest(".todoItem");
+            let id = $(item).children("input:hidden").val();
+            let content = prompt("수정할 내용을 입력해주세요.");
+            if (content) {
+                updateTodo(id, content);
+            }
+        });
     })
 
     function initList(list) {
@@ -136,6 +145,20 @@
             url: "todolist",
             method: "delete",
             data: {id: id},
+            success: (data) => {
+                findAll();
+            },
+            error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
+
+    function updateTodo(id, content) {
+        $.ajax({
+            url: "todolist",
+            method: "put",
+            data: {id: id, content: content},
             success: (data) => {
                 findAll();
             },

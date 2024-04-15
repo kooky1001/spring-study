@@ -51,4 +51,10 @@ public class TodoController {
 		return todoService.delete(id);
 	}
 
+	@ResponseBody
+	@PutMapping
+	public Todo update(@RequestParam Long id, @RequestParam String content) {
+		return todoService.update(id, content);
+	}
+
 }
