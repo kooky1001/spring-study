@@ -1,4 +1,4 @@
-package org.example.springjsp;
+package org.example.springjsp.web;
 
 import java.util.List;
 
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
@@ -20,7 +22,6 @@ public class IndexController {
 	@GetMapping("/")
 	public String index(Model model) {
 		List<Board> boardList = boardService.findAll();
-		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		return "index";
 	}
@@ -29,7 +30,7 @@ public class IndexController {
 	public String click(Model model, @PathVariable(value = "name", required = false) String name) {
 		System.out.println("name = " + name);
 		model.addAttribute("name", name);
-		return "click";
+		return "test/click";
 	}
 
 }

@@ -13,14 +13,14 @@ public class Board {
 	private String title;
 	private String content;
 	private String author;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private LocalDateTime createdDate;
+	private LocalDateTime modifiedDate;
 
 	@Builder
-	public Board(String title, String content, String author, LocalDateTime updatedAt) {
+	public Board(String title, String content, String author, LocalDateTime modifiedDate) {
 		this.title = title;
 		this.content = content;
 		this.author = author;
-		this.updatedAt = updatedAt;
+		this.modifiedDate = modifiedDate;
 	}
 }
