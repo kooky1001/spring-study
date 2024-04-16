@@ -28,7 +28,8 @@
             findAll(toDate);
         });
 
-        $("#toDate").val(new Date().toJSON().slice(0, 10));
+        // $("#toDate").val(new Date().toJSON().slice(0, 10));
+        $("#toDate").val(dateFormat());
         findAll();
 
         $("#list").on('change', "input[name='complete']", (e) => {
@@ -172,6 +173,14 @@
                 alert(err.toString());
             }
         });
+    }
+
+    function dateFormat() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = ('0' + (date.getMonth() + 1)).slice(-2);
+        let day = ('0' + date.getDate()).slice(-2);
+        return `\${year}-\${month}-\${day}`;
     }
 
 </script>
