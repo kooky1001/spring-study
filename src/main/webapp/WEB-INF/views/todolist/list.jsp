@@ -154,7 +154,7 @@
                 // findAllByComplete();
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -170,7 +170,7 @@
                 listOfComplete(data);
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -187,7 +187,7 @@
                 listByDate(data);
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -211,7 +211,7 @@
                 $("#content").val("");
                 alert("등록되었습니다.")
             }, error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -229,7 +229,7 @@
                 // findAllByDate();
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -248,7 +248,7 @@
                 // findAllByDate();
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -263,7 +263,7 @@
                 // findAllByDate();
             },
             error: (err) => {
-                alert(err.toString());
+                alert(errMessage(err));
             }
         });
     }
@@ -287,6 +287,12 @@
                             <div id="completeList"></div>`;
         $("#list").append(completeList);
         findAllByComplete();
+    }
+
+    function errMessage(err) {
+        err = err.responseJSON;
+        return `\${err.error} - \${err.status}
+        \${err.message}`;
     }
 
 </script>
