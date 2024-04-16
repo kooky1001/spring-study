@@ -3,6 +3,7 @@ package org.example.springjsp.domain.todolist;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.example.springjsp.domain.todolist.category.Category;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ public class TodoController {
 
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("categoryList", Category.values());
+		model.addAttribute("categoryList", null);
 		return "todolist/list";
 	}
 

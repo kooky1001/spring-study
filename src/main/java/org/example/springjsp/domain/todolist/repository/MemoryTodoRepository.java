@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.example.springjsp.domain.todolist.Category;
 import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.category.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.example.springjsp.domain.todolist.Category;
 import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.category.Category;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
