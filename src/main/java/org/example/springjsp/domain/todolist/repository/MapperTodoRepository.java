@@ -50,6 +50,6 @@ public class MapperTodoRepository implements TodoRepository {
 
 	@Override
 	public List<Todo> findAllByCategory(Category category) {
-		return List.of();
+		return todoMapper.findAllByCategory(category);
 	}
 }

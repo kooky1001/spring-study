@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/todolist")
 @Controller
@@ -32,7 +34,6 @@ public class TodoController {
 	@ResponseBody
 	@PostMapping
 	public Todo save(@ModelAttribute Todo todo) {
-		System.out.println("todo = " + todo);
 		return todoService.save(todo);
 	}
 
@@ -46,7 +47,9 @@ public class TodoController {
 	@ResponseBody
 	@GetMapping("list")
 	public List<Todo> listByCategory(@RequestParam Category category) {
-		return todoService.findAllByCategory(category);
+		List<Todo> todoList = todoService.findAllByCategory(category);
+		log.info(todoList.toString());
+		return todoList;
 	}
 
 	@ResponseBody

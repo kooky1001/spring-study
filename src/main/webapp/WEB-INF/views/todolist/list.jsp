@@ -22,8 +22,7 @@
 <article>
     <h2>목록</h2>
     <hr/>
-    <div id="list">
-    </div>
+    <div id="list"></div>
 </article>
 
 <script>
@@ -37,6 +36,7 @@
         $("#toDate").val(new Date().toJSON().slice(0, 10));
         findAllByDate();
         */
+        initCategory();
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
@@ -67,9 +67,9 @@
                 updateTodo(id, content);
             }
         });
-    })
+    });
 
-    function initList(list) {
+    function listByDate(list) {
         $("#list").empty();
         for (let item of list) {
             let todoItem = '';
@@ -100,24 +100,53 @@
         }
     }
 
-    function save() {
-        let toDate = $("#toDate").val();
-        let content = $("#content").val();
-        let category = $("#category").val();
-
-        if (!content) {
-            return;
+    function listByCategory(list) {
+        let categoryId = "#" + list[0].category;
+        let categoryName = $(`option[value=\${list[0].category}]`).html();
+        $(categoryId).empty();
+        $(categoryId).append(`<h4><i>\${categoryName}</i></h4>`);
+        for (let item of list) {
+            let todoItem = '';
+            if (item.completed) {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            } else {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            }
+            $(categoryId).append(todoItem);
         }
+        $(categoryId).append("<hr/>");
+    }
 
+    function findAllByCategory(category) {
         $.ajax({
-            url: "todolist",
-            method: "post",
-            data: {content: content, toDate: toDate, category: category},
+            url: "todolist/list",
+            method: "get",
+            data: {category: category},
             success: (data) => {
-                // findAllByDate();
-                $("#content").val("");
-                alert("등록되었습니다.")
-            }, error: (err) => {
+                if (data.length <= 0) {
+                    return;
+                }
+                listByCategory(data);
+            },
+            error: (err) => {
                 alert(err.toString());
             }
         });
@@ -132,9 +161,33 @@
             method: "get",
             data: {toDate: toDate},
             success: (data) => {
-                initList(data);
+                listByDate(data);
             },
             error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
+
+    function save() {
+        let toDate = $("#toDate").val();
+        let content = $("#content").val();
+        let category = $("#category").val();
+
+        if (!content) {
+            return;
+        }
+
+        $.ajax({
+            url: "todolist",
+            method: "post",
+            data: {content: content, toDate: toDate, category: category},
+            success: (data) => {
+                findAllByCategory(data.category);
+                // findAllByDate();
+                $("#content").val("");
+                alert("등록되었습니다.")
+            }, error: (err) => {
                 alert(err.toString());
             }
         });
@@ -181,6 +234,16 @@
             }
         });
     }
+
+    function initCategory() {
+        let categoryList = $.map($("#category option"), e => e.value);
+        for (let name of categoryList) {
+            let div = $("<div></div>").attr("id", name);
+            $("#list").append(div);
+            findAllByCategory(name);
+        }
+    }
+
 
 </script>
 
