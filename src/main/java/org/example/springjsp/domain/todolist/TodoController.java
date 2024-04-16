@@ -60,8 +60,11 @@ public class TodoController {
 
 	@ResponseBody
 	@DeleteMapping
-	public Long delete(@RequestParam Long id) {
-		return todoService.delete(id);
+	// public Long delete(@RequestParam Long id) {
+	public Todo delete(@RequestParam Long id) {
+		Todo todo = todoService.findById(id);
+		todoService.delete(id);
+		return todo;
 	}
 
 	@ResponseBody

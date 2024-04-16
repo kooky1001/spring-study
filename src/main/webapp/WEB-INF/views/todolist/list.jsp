@@ -208,13 +208,16 @@
         });
     }
 
-    function deleteTodo(id, checked) {
+    function deleteTodo(id) {
         $.ajax({
             url: "todolist",
             method: "delete",
             data: {id: id},
             success: (data) => {
-                findAllByDate();
+                // 마지막 항목 삭제의 경우 div내용이 삭제되지 않으므로 로직 추가
+                $("#" + data.category).empty();
+                findAllByCategory(data.category);
+                // findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
