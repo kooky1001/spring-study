@@ -48,7 +48,13 @@ public class TodoController {
 	@GetMapping("list")
 	public List<Todo> listByCategory(@RequestParam Category category) {
 		List<Todo> todoList = todoService.findAllByCategory(category);
-		log.info(todoList.toString());
+		return todoList;
+	}
+
+	@ResponseBody
+	@GetMapping("complete")
+	public List<Todo> listBycomplete() {
+		List<Todo> todoList = todoService.findAllByComplete();
 		return todoList;
 	}
 

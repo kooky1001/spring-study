@@ -107,32 +107,37 @@
         $(categoryId).append(`<h4><i>\${categoryName}</i></h4>`);
         for (let item of list) {
             let todoItem = '';
-            if (item.completed) {
-                todoItem = `<nav class="todoItem">
+            todoItem = `<nav class="todoItem">
+                            <input type="hidden" name="id" value="\${item.id}"/>
+                            <ul>
+                                <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
+                            </ul>
+                            <ul>
+                                <li><button class="updateBtn">수정</button></li>
+                                <li><button class="deleteBtn">삭제</button></li>
+                            </ul>
+                        </nav>`
+            $(categoryId).append(todoItem);
+        }
+        $(categoryId).append("<hr/>");
+    }
+
+    function listOfComplete(list) {
+        let categoryId = "#completeList"
+        $(categoryId).empty();
+        for (let item of list) {
+            let todoItem = '';
+            todoItem = `<nav class="todoItem">
                                 <input type="hidden" name="id" value="\${item.id}"/>
                                 <ul>
                                     <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
                                 </ul>
                                 <ul>
-                                    <li><button class="updateBtn">수정</button></li>
                                     <li><button class="deleteBtn">삭제</button></li>
                                 </ul>
                             </nav>`
-            } else {
-                todoItem = `<nav class="todoItem">
-                                <input type="hidden" name="id" value="\${item.id}"/>
-                                <ul>
-                                    <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
-                                </ul>
-                                <ul>
-                                    <li><button class="updateBtn">수정</button></li>
-                                    <li><button class="deleteBtn">삭제</button></li>
-                                </ul>
-                            </nav>`
-            }
             $(categoryId).append(todoItem);
         }
-        $(categoryId).append("<hr/>");
     }
 
     function findAllByCategory(category) {
@@ -145,6 +150,23 @@
                     return;
                 }
                 listByCategory(data);
+                // findAllByComplete();
+            },
+            error: (err) => {
+                alert(err.toString());
+            }
+        });
+    }
+
+    function findAllByComplete() {
+        $.ajax({
+            url: "todolist/complete",
+            method: "get",
+            success: (data) => {
+                if (data.length <= 0) {
+                    return;
+                }
+                listOfComplete(data);
             },
             error: (err) => {
                 alert(err.toString());
@@ -199,7 +221,10 @@
             method: "put",
             data: {id: id, completed: checked},
             success: (data) => {
+                $("#" + data.category).empty();
+                $("#completeList").empty();
                 findAllByCategory(data.category);
+                findAllByComplete();
                 // findAllByDate();
             },
             error: (err) => {
@@ -216,7 +241,9 @@
             success: (data) => {
                 // 마지막 항목 삭제의 경우 div내용이 삭제되지 않으므로 로직 추가
                 $("#" + data.category).empty();
+                $("#completeList").empty();
                 findAllByCategory(data.category);
+                findAllByComplete();
                 // findAllByDate();
             },
             error: (err) => {
@@ -247,6 +274,10 @@
             $("#list").append(div);
             findAllByCategory(name);
         }
+        let completeList = `<h4><i>완료</i></h4>
+                            <div id="completeList"></div>`;
+        $("#list").append(completeList);
+        findAllByComplete();
     }
 
 

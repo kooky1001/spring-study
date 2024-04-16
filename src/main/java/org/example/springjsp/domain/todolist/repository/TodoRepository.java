@@ -20,4 +20,6 @@ public interface TodoRepository {
 	Optional<Todo> findById(Long id);
 
 	List<Todo> findAllByCategory(Category category);
+
+	List<Todo> findAllByComplete();
 }

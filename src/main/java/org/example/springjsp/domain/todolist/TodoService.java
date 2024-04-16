@@ -56,4 +56,8 @@ public class TodoService {
 	public List<Todo> findAllByCategory(Category category) {
 		return todoRepository.findAllByCategory(category);
 	}
+
+	public List<Todo> findAllByComplete() {
+		return todoRepository.findAllByComplete();
+	}
 }

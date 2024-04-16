@@ -52,4 +52,9 @@ public class MapperTodoRepository implements TodoRepository {
 	public List<Todo> findAllByCategory(Category category) {
 		return todoMapper.findAllByCategory(category);
 	}
+
+	@Override
+	public List<Todo> findAllByComplete() {
+		return todoMapper.findAllByComplete();
+	}
 }

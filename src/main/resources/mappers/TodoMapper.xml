@@ -16,6 +16,14 @@
         SELECT id, content, completed, toDate, category
         FROM todo
         where category = #{category}
+          and completed = false
+        order by completed asc, id asc;
+    </select>
+
+    <select id="findAllByComplete" resultType="org.example.springjsp.domain.todolist.Todo">
+        SELECT id, content, completed, toDate, category
+        FROM todo
+        where completed = true
         order by completed asc, id asc;
     </select>
 

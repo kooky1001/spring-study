@@ -56,4 +56,9 @@ public class MemoryTodoRepository implements TodoRepository {
 	public List<Todo> findAllByCategory(Category category) {
 		return List.of();
 	}
+
+	@Override
+	public List<Todo> findAllByComplete() {
+		return List.of();
+	}
 }
