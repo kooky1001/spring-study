@@ -17,7 +17,6 @@ class CategoryServiceTest {
 	@Test
 	void findAll() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(true)
 			.build();
@@ -32,7 +31,6 @@ class CategoryServiceTest {
 	@Test
 	void findAllByActive() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(false)
 			.build();
@@ -46,7 +44,6 @@ class CategoryServiceTest {
 	@Test
 	void findOne() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(true)
 			.build();
@@ -60,7 +57,6 @@ class CategoryServiceTest {
 	@Test
 	void save() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(true)
 			.build();
@@ -73,7 +69,6 @@ class CategoryServiceTest {
 	@Test
 	void delete() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(true)
 			.build();
@@ -87,14 +82,13 @@ class CategoryServiceTest {
 	@Test
 	void update() {
 		Category category = Category.builder()
-			.name("test")
 			.description("테스트")
 			.active(true)
 			.build();
 		Category saved = categoryService.save(category);
 
 		categoryService.update(saved.getId(), Category.builder().active(false).build());
-		
+
 		assertThat(categoryService.findOne(saved.getId()).isActive()).isEqualTo(false);
 	}
 

@@ -10,13 +10,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Category {
 	private Long id;
-	private String name;
 	private String description;
 	private boolean active;
 
 	@Builder
-	public Category(String name, String description, boolean active) {
-		this.name = name;
+	public Category(String description, boolean active) {
 		this.description = description;
 		this.active = active;
 	}
