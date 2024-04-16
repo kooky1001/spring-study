@@ -199,7 +199,8 @@
             method: "put",
             data: {id: id, completed: checked},
             success: (data) => {
-                findAllByDate();
+                findAllByCategory(data.category);
+                // findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
@@ -227,7 +228,8 @@
             method: "put",
             data: {id: id, content: content},
             success: (data) => {
-                findAllByDate();
+                findAllByCategory(data.category);
+                // findAllByDate();
             },
             error: (err) => {
                 alert(err.toString());
