@@ -19,13 +19,15 @@ public class Todo {
 	private String content;
 	private boolean completed;
 	private LocalDate toDate;
+	private Category category;
 	//	private LocalDateTime createdDate;
 	//	private LocalDateTime modifiedDate;
 
 	@Builder
-	public Todo(String content, boolean completed, LocalDate date) {
+	public Todo(String content, boolean completed, LocalDate date, Category category) {
 		this.content = content;
 		this.completed = completed;
 		this.toDate = date;
+		this.category = category;
 	}
 }

@@ -16,22 +16,6 @@ public class TodoService {
 
 	// @PostConstruct
 	// public void init() {
-	// 	Todo todo1 = Todo.builder()
-	// 		.content("해야할일 1")
-	// 		.completed(false)
-	// 		.date(LocalDate.of(2024, 4, 15)).build();
-	// 	Todo todo2 = Todo.builder()
-	// 		.content("해야할일 2")
-	// 		.completed(false)
-	// 		.date(LocalDate.of(2024, 4, 14)).build();
-	// 	Todo todo3 = Todo.builder()
-	// 		.content("해야할일 3")
-	// 		.completed(true)
-	// 		.date(LocalDate.of(2024, 4, 15)).build();
-	//
-	// 	todoRepository.save(todo1);
-	// 	todoRepository.save(todo2);
-	// 	todoRepository.save(todo3);
 	// }
 
 	public Todo save(Todo todo) {
@@ -67,5 +51,13 @@ public class TodoService {
 	public Long delete(Long id) {
 		Todo todo = findById(id);
 		return todoRepository.delete(todo);
+	}
+
+	public List<Todo> findAllByCategory(Category category) {
+		return todoRepository.findAllByCategory(category);
+	}
+
+	public List<Todo> findAllByComplete() {
+		return todoRepository.findAllByComplete();
 	}
 }
