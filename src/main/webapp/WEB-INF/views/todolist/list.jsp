@@ -242,7 +242,7 @@
             let item = `<nav class="categoryItem">
                             <input type="hidden" name="id" value="\${category.id}"/>
                             <ul>
-                                <li><strong> * <a href="#" class="description">\${category.description}</a></strong></li>
+                                <li><strong> * <a href="javascript:void(0)" class="description">\${category.description}</a></strong></li>
                             </ul>
                             <ul>
                                 <li>
