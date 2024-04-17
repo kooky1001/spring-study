@@ -53,7 +53,7 @@ public class TodoService {
 		return todoRepository.delete(todo);
 	}
 
-	public List<Todo> findAllByCategory(Category category) {
+	public List<Todo> findAllByCategory(Long category) {
 		return todoRepository.findAllByCategory(category);
 	}
 

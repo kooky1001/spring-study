@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.example.springjsp.domain.todolist.category.CategoryMapper">
+    <select id="findAll" resultType="org.example.springjsp.domain.todolist.category.Category">
+        SELECT id, description, active
+        FROM category
+        order by id asc;
+    </select>
+
+    <select id="findAllByActive" resultType="org.example.springjsp.domain.todolist.category.Category">
+        SELECT id, description, active
+        FROM category
+        where active = true
+        order by id asc;
+    </select>
+
+    <select id="findById" resultType="org.example.springjsp.domain.todolist.category.Category" parameterType="Long">
+        SELECT id, description, active
+        FROM category
+        where id = #{id}
+    </select>
+
+    <insert id="save" parameterType="org.example.springjsp.domain.todolist.category.Category" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        insert into category(description, active)
+        values (#{description},
+                true)
+    </insert>
+
+    <update id="update" parameterType="Map">
+        update category
+        set active = #{category.active}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete
+        from category
+        where id = #{id}
+    </delete>
+</mapper>

@@ -12,11 +12,10 @@
     </select>
 
     <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.Todo"
-            parameterType="org.example.springjsp.domain.todolist.Category">
+            parameterType="Long">
         SELECT id, content, completed, toDate, category
         FROM todo
         where category = #{category}
-          and completed = false
         order by completed asc, id asc;
     </select>
 
@@ -53,5 +52,11 @@
         delete
         from todo
         where id = #{id}
+    </delete>
+
+    <delete id="deleteAllByCategoryId" parameterType="Long">
+        delete
+        from todo
+        where category = #{category}
     </delete>
 </mapper>

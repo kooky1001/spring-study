@@ -27,7 +27,7 @@ public class TodoController {
 
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("categoryList", Category.values());
+		model.addAttribute("categoryList", null);
 		return "todolist/list";
 	}
 
@@ -46,7 +46,7 @@ public class TodoController {
 
 	@ResponseBody
 	@GetMapping("list")
-	public List<Todo> listByCategory(@RequestParam Category category) {
+	public List<Todo> listByCategory(@RequestParam Long category) {
 		List<Todo> todoList = todoService.findAllByCategory(category);
 		return todoList;
 	}

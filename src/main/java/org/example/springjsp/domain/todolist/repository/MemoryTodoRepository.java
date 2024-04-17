@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.example.springjsp.domain.todolist.Category;
 import org.example.springjsp.domain.todolist.Todo;
 import org.springframework.stereotype.Repository;
 
@@ -53,12 +52,17 @@ public class MemoryTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAllByCategory(Category category) {
+	public List<Todo> findAllByCategory(Long category) {
 		return List.of();
 	}
 
 	@Override
 	public List<Todo> findAllByComplete() {
 		return List.of();
+	}
+
+	@Override
+	public void deleteAllByCategoryId(Long id) {
+		
 	}
 }

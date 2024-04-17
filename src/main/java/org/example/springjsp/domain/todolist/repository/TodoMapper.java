@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.example.springjsp.domain.todolist.Category;
 import org.example.springjsp.domain.todolist.Todo;
 
 @Mapper
@@ -21,7 +20,9 @@ public interface TodoMapper {
 
 	Long delete(Long id);
 
-	List<Todo> findAllByCategory(Category category);
+	List<Todo> findAllByCategory(Long category);
 
 	List<Todo> findAllByComplete();
+
+	void deleteAllByCategoryId(Long category);
 }
