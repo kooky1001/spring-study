@@ -56,6 +56,7 @@ public class TodoController {
 		return todoList;
 	}
 
+	// 완료목록만 조회
 	// @GetMapping("complete")
 	public List<Todo> listBycomplete() {
 		List<Todo> todoList = todoService.findAllByComplete();

@@ -256,9 +256,9 @@
 
     function deleteCategory(id) {
         $.ajax({
-            url: "todolist/category",
+            url: `todolist/category/\${id}`,
             method: "delete",
-            data: {id: id},
+            contentType: "application/json; charset=utf-8",
             success: (data) => {
                 findAllCategory();
                 let categoryId = $("#categoryId").val();
@@ -287,7 +287,8 @@
 
         $.post({
             url: "todolist/category",
-            data: {description: description},
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({description: description}),
             success: (data) => {
                 findAllCategory();
                 $("#categoryDescription").val("");

@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -29,19 +31,18 @@ public class CategoryController {
 	}
 
 	@Operation(summary = "카테고리 삭제", description = "목록에 있는 카테고리 삭제 및 관련된 할 일 삭제")
-	@Parameter(name = "id", description = "카테고리 id", example = "1")
-	@DeleteMapping
-	public Category delete(@RequestParam Long id) {
-		Category category = categoryService.findOne(id);
+	@Parameter(name = "id", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
+	@DeleteMapping("{id}")
+	public Category delete(@PathVariable Long id) {
+		Category find = categoryService.findOne(id);
 		categoryService.delete(id);
-		return category;
+		return find;
 	}
 
 	@Operation(summary = "카테고리 저장", description = "신규 카테고리 추가")
 	@Parameter(name = "description", description = "카테고리 이름", example = "기타")
 	@PostMapping
-	public Category save(@RequestParam String description) {
-		Category category = Category.builder().description(description).build();
+	public Category save(@RequestBody Category category) {
 		return categoryService.save(category);
 	}
 }
