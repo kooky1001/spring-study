@@ -226,6 +226,10 @@
             url: "todolist/category",
             success: (data) => {
                 listOfCategory(data);
+
+                if (data.length > 0 && !$("#categoryId").val()) {
+                    findAllByCategory(data[0].id, data[0].description);
+                }
             }, error: (err) => {
                 alert(errMessage(err));
             }
