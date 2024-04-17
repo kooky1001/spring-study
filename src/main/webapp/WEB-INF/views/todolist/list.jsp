@@ -2,29 +2,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/layout/header.jsp"/>
 
-<article>
-    <div class="grid">
-        <h2>할 일</h2>
-        <button>목록 추가</button>
-        <%--        <input type="date" name="toDate" id="toDate">--%>
-    </div>
-    <hr/>
-    <fieldset role="group">
-        <select id="category" style="width: 30%">
-            <c:forEach var="category" items="${categoryList}">
-                <option value="${category}">${category.description}</option>
-            </c:forEach>
-        </select>
-        <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>
-        <input type="submit" value="등록" onclick="save()"/>
-    </fieldset>
-</article>
-
-<article>
-    <h2>목록</h2>
-    <hr/>
-    <div id="list"></div>
-</article>
+<h2>TodoList</h2>
+<%--        <input type="date" name="toDate" id="toDate">--%>
+<hr/>
+<%--    <fieldset role="group">--%>
+<%--        <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>--%>
+<%--        <input type="submit" value="등록" onclick="save()"/>--%>
+<%--    </fieldset>--%>
+<div role="group">
+    <article style="width: 30%;">
+        <div class="grid">
+            <h2>카테고리</h2>
+        </div>
+        <hr/>
+        <div id="categoryList"></div>
+        <footer>
+            <fieldset role="group">
+                <input type="text" name="content" id="aaa" placeholder="카테고리 추가"/>
+                <input type="submit" value="등록" onclick="save()"/>
+            </fieldset>
+        </footer>
+    </article>
+    <article style="width: 70%">
+        <div class="grid">
+            <h2>목록</h2>
+            <h4 style="text-align: end;padding-right: 10%">
+                <i id="title"></i>
+            </h4>
+        </div>
+        <hr/>
+        <div id="list"></div>
+        <footer>
+            <fieldset role="group">
+                <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>
+                <input type="submit" value="등록" onclick="save()"/>
+            </fieldset>
+        </footer>
+    </article>
+</div>
 
 <script>
     $(document).ready(() => {
@@ -38,7 +53,8 @@
         $("#toDate").val(dateFormat());
         findAllByDate();
         */
-        initCategory();
+        findAllCategories();
+        // initCategory();
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
@@ -71,6 +87,7 @@
         });
     });
 
+    /*
     function listByDate(list) {
         $("#list").empty();
         for (let item of list) {
@@ -101,6 +118,7 @@
             $("#list").append(todoItem);
         }
     }
+     */
 
     function listByCategory(list) {
         let categoryId = "#" + list[0].category;
@@ -109,7 +127,18 @@
         $(categoryId).append(`<h4><i>\${categoryName}</i></h4>`);
         for (let item of list) {
             let todoItem = '';
-            todoItem = `<nav class="todoItem">
+            if (item.completed) {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`;
+            } else {
+                todoItem = `<nav class="todoItem">
                             <input type="hidden" name="id" value="\${item.id}"/>
                             <ul>
                                 <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
@@ -118,28 +147,11 @@
                                 <li><button class="updateBtn">수정</button></li>
                                 <li><button class="deleteBtn">삭제</button></li>
                             </ul>
-                        </nav>`
+                        </nav>`;
+            }
             $(categoryId).append(todoItem);
         }
         $(categoryId).append("<hr/>");
-    }
-
-    function listOfComplete(list) {
-        let categoryId = "#completeList"
-        $(categoryId).empty();
-        for (let item of list) {
-            let todoItem = '';
-            todoItem = `<nav class="todoItem">
-                                <input type="hidden" name="id" value="\${item.id}"/>
-                                <ul>
-                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
-                                </ul>
-                                <ul>
-                                    <li><button class="deleteBtn">삭제</button></li>
-                                </ul>
-                            </nav>`
-            $(categoryId).append(todoItem);
-        }
     }
 
     function findAllByCategory(category) {
@@ -152,7 +164,6 @@
                     return;
                 }
                 listByCategory(data);
-                // findAllByComplete();
             },
             error: (err) => {
                 alert(errMessage(err));
@@ -160,22 +171,7 @@
         });
     }
 
-    function findAllByComplete() {
-        $.ajax({
-            url: "todolist/complete",
-            method: "get",
-            success: (data) => {
-                if (data.length <= 0) {
-                    return;
-                }
-                listOfComplete(data);
-            },
-            error: (err) => {
-                alert(errMessage(err));
-            }
-        });
-    }
-
+    /*
     function findAllByDate(toDate) {
         if (!toDate) {
             toDate = $("#toDate").val();
@@ -192,6 +188,7 @@
             }
         });
     }
+    */
 
     function save() {
         let toDate = $("#toDate").val();
@@ -224,9 +221,7 @@
             data: {id: id, completed: checked},
             success: (data) => {
                 $("#" + data.category).empty();
-                $("#completeList").empty();
                 findAllByCategory(data.category);
-                findAllByComplete();
                 // findAllByDate();
             },
             error: (err) => {
@@ -243,9 +238,7 @@
             success: (data) => {
                 // 마지막 항목 삭제의 경우 div내용이 삭제되지 않으므로 로직 추가
                 $("#" + data.category).empty();
-                $("#completeList").empty();
                 findAllByCategory(data.category);
-                findAllByComplete();
                 // findAllByDate();
             },
             error: (err) => {
@@ -269,6 +262,7 @@
         });
     }
 
+    /*
     function dateFormat() {
         let date = new Date();
         let year = date.getFullYear();
@@ -276,24 +270,50 @@
         let day = ('0' + date.getDate()).slice(-2);
         return `\${year}-\${month}-\${day}`;
     }
+     */
 
     function initCategory() {
         let categoryList = $.map($("#category option"), e => e.value);
         for (let name of categoryList) {
             let div = $("<div></div>").attr("id", name);
             $("#list").append(div);
-            findAllByCategory(name);
+            // findAllByCategory(name);
         }
-        let completeList = `<h4><i>완료</i></h4>
-                            <div id="completeList"></div>`;
-        $("#list").append(completeList);
-        findAllByComplete();
     }
 
     function errMessage(err) {
         err = err.responseJSON;
         return `\${err.error} - \${err.status}
         \${err.message}`;
+    }
+
+    function findAllCategories() {
+        $.get({
+            url: "todolist/category",
+            success: (data) => {
+                listOfCategory(data);
+            }, error: (err) => {
+                alert(errMessage(err));
+            }
+        });
+    }
+
+    function listOfCategory(list) {
+        $("#categoryList").empty();
+        for (let category of list) {
+            let item = `<nav class="categoryItem">
+                            <input type="hidden" name="id" value="\${category.id}"/>
+                            <ul>
+                                <li><strong> * <a href="#" class="description">\${category.description}</a></strong></li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <button class="deleteBtn secondary">X</button>
+                                </li>
+                            </ul>
+                        </nav>`;
+            $("#categoryList").append(item);
+        }
     }
 
 </script>
