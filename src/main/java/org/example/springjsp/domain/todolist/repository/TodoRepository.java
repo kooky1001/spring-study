@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.example.springjsp.domain.todolist.Todo;
-import org.example.springjsp.domain.todolist.category.Category;
 
 public interface TodoRepository {
 
@@ -19,7 +18,7 @@ public interface TodoRepository {
 
 	Optional<Todo> findById(Long id);
 
-	List<Todo> findAllByCategory(Category category);
+	List<Todo> findAllByCategory(Long category);
 
 	List<Todo> findAllByComplete();
 }

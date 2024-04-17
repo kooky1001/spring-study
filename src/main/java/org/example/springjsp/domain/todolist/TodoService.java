@@ -3,7 +3,6 @@ package org.example.springjsp.domain.todolist;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.example.springjsp.domain.todolist.category.Category;
 import org.example.springjsp.domain.todolist.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +53,7 @@ public class TodoService {
 		return todoRepository.delete(todo);
 	}
 
-	public List<Todo> findAllByCategory(Category category) {
+	public List<Todo> findAllByCategory(Long category) {
 		return todoRepository.findAllByCategory(category);
 	}
 

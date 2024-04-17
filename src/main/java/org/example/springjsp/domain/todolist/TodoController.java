@@ -3,7 +3,6 @@ package org.example.springjsp.domain.todolist;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.example.springjsp.domain.todolist.category.Category;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +46,7 @@ public class TodoController {
 
 	@ResponseBody
 	@GetMapping("list")
-	public List<Todo> listByCategory(@RequestParam Category category) {
+	public List<Todo> listByCategory(@RequestParam Long category) {
 		List<Todo> todoList = todoService.findAllByCategory(category);
 		return todoList;
 	}

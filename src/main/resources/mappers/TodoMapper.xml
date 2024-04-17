@@ -12,7 +12,7 @@
     </select>
 
     <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.Todo"
-            parameterType="org.example.springjsp.domain.todolist.category.Category">
+            parameterType="Long">
         SELECT id, content, completed, toDate, category
         FROM todo
         where category = #{category}

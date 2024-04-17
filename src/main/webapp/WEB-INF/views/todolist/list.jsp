@@ -85,6 +85,13 @@
                 updateTodo(id, content);
             }
         });
+
+        $("#categoryList").on('click', ".description", (e) => {
+            let item = e.target.closest(".categoryItem");
+            let id = $(item).find("input[name='id']").val();
+            let description = $(item).find(".description").html();
+            findAllByCategory(id, description);
+        });
     });
 
     /*
@@ -121,10 +128,7 @@
      */
 
     function listByCategory(list) {
-        let categoryId = "#" + list[0].category;
-        let categoryName = $(`option[value=\${list[0].category}]`).html();
-        $(categoryId).empty();
-        $(categoryId).append(`<h4><i>\${categoryName}</i></h4>`);
+        $("#list").empty();
         for (let item of list) {
             let todoItem = '';
             if (item.completed) {
@@ -149,20 +153,17 @@
                             </ul>
                         </nav>`;
             }
-            $(categoryId).append(todoItem);
+            $("#list").append(todoItem);
         }
-        $(categoryId).append("<hr/>");
     }
 
-    function findAllByCategory(category) {
+    function findAllByCategory(category, description) {
+        $("#title").html(description);
         $.ajax({
             url: "todolist/list",
             method: "get",
             data: {category: category},
             success: (data) => {
-                if (data.length <= 0) {
-                    return;
-                }
                 listByCategory(data);
             },
             error: (err) => {
