@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.example.springjsp.domain.todolist.Category;
 import org.example.springjsp.domain.todolist.Todo;
 
 public interface TodoRepository {
@@ -17,4 +18,8 @@ public interface TodoRepository {
 	Long delete(Todo todo);
 
 	Optional<Todo> findById(Long id);
+
+	List<Todo> findAllByCategory(Category category);
+
+	List<Todo> findAllByComplete();
 }
