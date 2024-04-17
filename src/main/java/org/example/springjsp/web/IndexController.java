@@ -33,4 +33,9 @@ public class IndexController {
 		return "test/click";
 	}
 
+	@GetMapping("/todolist")
+	public String todo() {
+		return "todolist/list";
+	}
+
 }
