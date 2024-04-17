@@ -53,4 +53,10 @@
         from todo
         where id = #{id}
     </delete>
+
+    <delete id="deleteAllByCategoryId" parameterType="Long">
+        delete
+        from todo
+        where category = #{category}
+    </delete>
 </mapper>

@@ -2,6 +2,7 @@ package org.example.springjsp.domain.todolist.category;
 
 import java.util.List;
 
+import org.example.springjsp.domain.todolist.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
 	private final CategoryRepository categoryRepository;
+	private final TodoRepository todoRepository;
 
 	public List<Category> findAll() {
 		return categoryRepository.findAll();
@@ -30,6 +32,7 @@ public class CategoryService {
 
 	public Long delete(Long id) {
 		Category category = findOne(id);
+		todoRepository.deleteAllByCategoryId(category.getId());
 		return categoryRepository.delete(category);
 	}
 

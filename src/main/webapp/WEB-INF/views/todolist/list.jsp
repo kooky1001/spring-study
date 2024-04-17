@@ -5,10 +5,6 @@
 <h2>TodoList</h2>
 <%--        <input type="date" name="toDate" id="toDate">--%>
 <hr/>
-<%--    <fieldset role="group">--%>
-<%--        <input type="text" name="content" id="content" placeholder="할 일을 입력하세요."/>--%>
-<%--        <input type="submit" value="등록" onclick="save()"/>--%>
-<%--    </fieldset>--%>
 <div role="group">
     <article style="width: 30%;">
         <div class="grid">
@@ -92,40 +88,15 @@
             let description = $(item).find(".description").html();
             findAllByCategory(id, description);
         });
-    });
 
-    /*
-    function listByDate(list) {
-        $("#list").empty();
-        for (let item of list) {
-            let todoItem = '';
-            if (item.completed) {
-                todoItem = `<nav class="todoItem">
-                                <input type="hidden" name="id" value="\${item.id}"/>
-                                <ul>
-                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
-                                </ul>
-                                <ul>
-                                    <li><button class="updateBtn">수정</button></li>
-                                    <li><button class="deleteBtn">삭제</button></li>
-                                </ul>
-                            </nav>`
-            } else {
-                todoItem = `<nav class="todoItem">
-                                <input type="hidden" name="id" value="\${item.id}"/>
-                                <ul>
-                                    <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
-                                </ul>
-                                <ul>
-                                    <li><button class="updateBtn">수정</button></li>
-                                    <li><button class="deleteBtn">삭제</button></li>
-                                </ul>
-                            </nav>`
+        $("#categoryList").on('click', ".deleteBtn", (e) => {
+            let item = e.target.closest(".categoryItem");
+            let id = $(item).find("input[name='id']").val();
+            if (confirm("삭제하시겠습니까?")) {
+                deleteCategory(id);
             }
-            $("#list").append(todoItem);
-        }
-    }
-     */
+        });
+    });
 
     function listOfTodoByCategory(list) {
         $("#list").empty();
@@ -176,27 +147,7 @@
         });
     }
 
-    /*
-    function findAllByDate(toDate) {
-        if (!toDate) {
-            toDate = $("#toDate").val();
-        }
-        $.ajax({
-            url: "todolist/list",
-            method: "get",
-            data: {toDate: toDate},
-            success: (data) => {
-                listByDate(data);
-            },
-            error: (err) => {
-                alert(errMessage(err));
-            }
-        });
-    }
-    */
-
     function save() {
-        // let toDate = $("#toDate").val();
         let content = $("#content").val();
         let category = $("#categoryId").val();
 
@@ -264,16 +215,6 @@
         });
     }
 
-    /*
-    function dateFormat() {
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = ('0' + (date.getMonth() + 1)).slice(-2);
-        let day = ('0' + date.getDate()).slice(-2);
-        return `\${year}-\${month}-\${day}`;
-    }
-     */
-
     function errMessage(err) {
         err = err.responseJSON;
         return `\${err.error} - \${err.status}
@@ -308,6 +249,83 @@
             $("#categoryList").append(item);
         }
     }
+
+    function deleteCategory(id) {
+        $.ajax({
+            url: "todolist/category",
+            method: "delete",
+            data: {id: id},
+            success: (data) => {
+                findAllCategory();
+                findAllByCategory(data.id);
+            },
+            error: (err) => {
+                alert(errMessage(err));
+            }
+        });
+    }
+
+    /*
+    function listByDate(list) {
+        $("#list").empty();
+        for (let item of list) {
+            let todoItem = '';
+            if (item.completed) {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            } else {
+                todoItem = `<nav class="todoItem">
+                                <input type="hidden" name="id" value="\${item.id}"/>
+                                <ul>
+                                    <li><label><input type="checkbox" name="complete"><span class="todoContent">\${item.content}</span></label></li>
+                                </ul>
+                                <ul>
+                                    <li><button class="updateBtn">수정</button></li>
+                                    <li><button class="deleteBtn">삭제</button></li>
+                                </ul>
+                            </nav>`
+            }
+            $("#list").append(todoItem);
+        }
+    }
+     */
+
+    /*
+    function findAllByDate(toDate) {
+        if (!toDate) {
+            toDate = $("#toDate").val();
+        }
+        $.ajax({
+            url: "todolist/list",
+            method: "get",
+            data: {toDate: toDate},
+            success: (data) => {
+                listByDate(data);
+            },
+            error: (err) => {
+                alert(errMessage(err));
+            }
+        });
+    }
+    */
+
+    /*
+    function dateFormat() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = ('0' + (date.getMonth() + 1)).slice(-2);
+        let day = ('0' + date.getDate()).slice(-2);
+        return `\${year}-\${month}-\${day}`;
+    }
+     */
 
 </script>
 

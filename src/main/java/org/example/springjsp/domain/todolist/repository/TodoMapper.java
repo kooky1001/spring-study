@@ -23,4 +23,6 @@ public interface TodoMapper {
 	List<Todo> findAllByCategory(Long category);
 
 	List<Todo> findAllByComplete();
+
+	void deleteAllByCategoryId(Long category);
 }

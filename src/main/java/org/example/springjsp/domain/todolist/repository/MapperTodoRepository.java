@@ -56,4 +56,9 @@ public class MapperTodoRepository implements TodoRepository {
 	public List<Todo> findAllByComplete() {
 		return todoMapper.findAllByComplete();
 	}
+
+	@Override
+	public void deleteAllByCategoryId(Long category) {
+		todoMapper.deleteAllByCategoryId(category);
+	}
 }

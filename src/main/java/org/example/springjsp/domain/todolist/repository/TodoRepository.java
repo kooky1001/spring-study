@@ -21,4 +21,6 @@ public interface TodoRepository {
 	List<Todo> findAllByCategory(Long category);
 
 	List<Todo> findAllByComplete();
+
+	void deleteAllByCategoryId(Long category);
 }

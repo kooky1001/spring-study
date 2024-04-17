@@ -60,4 +60,9 @@ public class MemoryTodoRepository implements TodoRepository {
 	public List<Todo> findAllByComplete() {
 		return List.of();
 	}
+
+	@Override
+	public void deleteAllByCategoryId(Long id) {
+		
+	}
 }
