@@ -16,7 +16,6 @@
         SELECT id, content, completed, toDate, category
         FROM todo
         where category = #{category}
-          and completed = false
         order by completed asc, id asc;
     </select>
 

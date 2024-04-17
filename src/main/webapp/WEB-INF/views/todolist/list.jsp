@@ -27,6 +27,7 @@
         <div class="grid">
             <h2>목록</h2>
             <h4 style="text-align: end;padding-right: 10%">
+                <input type="hidden" name="categoryId" id="categoryId"/>
                 <i id="title"></i>
             </h4>
         </div>
@@ -53,8 +54,7 @@
         $("#toDate").val(dateFormat());
         findAllByDate();
         */
-        findAllCategories();
-        // initCategory();
+        findAllCategory();
 
         $("#list").on('change', "input[name='complete']", (e) => {
             let item = e.target.closest(".todoItem");
@@ -127,7 +127,7 @@
     }
      */
 
-    function listByCategory(list) {
+    function listOfTodoByCategory(list) {
         $("#list").empty();
         for (let item of list) {
             let todoItem = '';
@@ -138,7 +138,7 @@
                                     <li><label><input type="checkbox" name="complete" checked/><s><span class="todoContent">\${item.content}</span></s></label></li>
                                 </ul>
                                 <ul>
-                                    <li><button class="deleteBtn">삭제</button></li>
+                                    <li><button class="deleteBtn secondary">삭제</button></li>
                                 </ul>
                             </nav>`;
             } else {
@@ -149,7 +149,7 @@
                             </ul>
                             <ul>
                                 <li><button class="updateBtn">수정</button></li>
-                                <li><button class="deleteBtn">삭제</button></li>
+                                <li><button class="deleteBtn secondary">삭제</button></li>
                             </ul>
                         </nav>`;
             }
@@ -158,13 +158,17 @@
     }
 
     function findAllByCategory(category, description) {
-        $("#title").html(description);
+        if (description) {
+            $("#categoryId").val(category);
+            $("#title").html(description);
+        }
+
         $.ajax({
             url: "todolist/list",
             method: "get",
             data: {category: category},
             success: (data) => {
-                listByCategory(data);
+                listOfTodoByCategory(data);
             },
             error: (err) => {
                 alert(errMessage(err));
@@ -192,21 +196,24 @@
     */
 
     function save() {
-        let toDate = $("#toDate").val();
+        // let toDate = $("#toDate").val();
         let content = $("#content").val();
-        let category = $("#category").val();
+        let category = $("#categoryId").val();
 
         if (!content) {
+            return;
+        }
+        if (!category) {
+            alert("카테고리를 선택해주세요.");
             return;
         }
 
         $.ajax({
             url: "todolist",
             method: "post",
-            data: {content: content, toDate: toDate, category: category},
+            data: {content: content, category: category},
             success: (data) => {
                 findAllByCategory(data.category);
-                // findAllByDate();
                 $("#content").val("");
                 alert("등록되었습니다.")
             }, error: (err) => {
@@ -221,9 +228,7 @@
             method: "put",
             data: {id: id, completed: checked},
             success: (data) => {
-                $("#" + data.category).empty();
                 findAllByCategory(data.category);
-                // findAllByDate();
             },
             error: (err) => {
                 alert(errMessage(err));
@@ -237,10 +242,7 @@
             method: "delete",
             data: {id: id},
             success: (data) => {
-                // 마지막 항목 삭제의 경우 div내용이 삭제되지 않으므로 로직 추가
-                $("#" + data.category).empty();
                 findAllByCategory(data.category);
-                // findAllByDate();
             },
             error: (err) => {
                 alert(errMessage(err));
@@ -255,7 +257,6 @@
             data: {id: id, content: content},
             success: (data) => {
                 findAllByCategory(data.category);
-                // findAllByDate();
             },
             error: (err) => {
                 alert(errMessage(err));
@@ -273,22 +274,13 @@
     }
      */
 
-    function initCategory() {
-        let categoryList = $.map($("#category option"), e => e.value);
-        for (let name of categoryList) {
-            let div = $("<div></div>").attr("id", name);
-            $("#list").append(div);
-            // findAllByCategory(name);
-        }
-    }
-
     function errMessage(err) {
         err = err.responseJSON;
         return `\${err.error} - \${err.status}
         \${err.message}`;
     }
 
-    function findAllCategories() {
+    function findAllCategory() {
         $.get({
             url: "todolist/category",
             success: (data) => {
