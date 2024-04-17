@@ -257,7 +257,12 @@
             data: {id: id},
             success: (data) => {
                 findAllCategory();
-                findAllByCategory(data.id);
+                let categoryId = $("#categoryId").val();
+                if (data.id == categoryId) {
+                    $("#categoryId").val("");
+                    $("#title").html("");
+                    findAllByCategory(data.id);
+                }
             },
             error: (err) => {
                 alert(errMessage(err));
