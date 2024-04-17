@@ -63,6 +63,5 @@ public class MemoryTodoRepository implements TodoRepository {
 
 	@Override
 	public void deleteAllByCategoryId(Long id) {
-		
 	}
 }
