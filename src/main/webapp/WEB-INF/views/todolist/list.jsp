@@ -14,8 +14,8 @@
         <div id="categoryList"></div>
         <footer>
             <fieldset role="group">
-                <input type="text" name="content" id="aaa" placeholder="카테고리 추가"/>
-                <input type="submit" value="등록" onclick="save()"/>
+                <input type="text" name="content" id="categoryDescription" placeholder="카테고리 추가"/>
+                <input type="submit" value="등록" onclick="saveCategory()"/>
             </fieldset>
         </footer>
     </article>
@@ -151,11 +151,11 @@
         let content = $("#content").val();
         let category = $("#categoryId").val();
 
-        if (!content) {
-            return;
-        }
         if (!category) {
             alert("카테고리를 선택해주세요.");
+            return;
+        }
+        if (!content) {
             return;
         }
 
@@ -260,6 +260,30 @@
                 findAllByCategory(data.id);
             },
             error: (err) => {
+                alert(errMessage(err));
+            }
+        });
+    }
+
+    function saveCategory() {
+        let description = $("#categoryDescription").val();
+
+        if (!description) {
+            return;
+        }
+
+        if (!confirm("카테고리를 등록하시겠습니까?")) {
+            return;
+        }
+
+        $.post({
+            url: "todolist/category",
+            data: {description: description},
+            success: (data) => {
+                findAllCategory();
+                $("#categoryDescription").val("");
+                alert("등록되었습니다.")
+            }, error: (err) => {
                 alert(errMessage(err));
             }
         });
