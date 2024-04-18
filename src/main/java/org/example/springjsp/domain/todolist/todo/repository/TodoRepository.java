@@ -1,11 +1,10 @@
-package org.example.springjsp.domain.todolist.repository;
+package org.example.springjsp.domain.todolist.todo.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.example.springjsp.domain.todolist.Category;
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 
 public interface TodoRepository {
 
@@ -13,13 +12,15 @@ public interface TodoRepository {
 
 	List<Todo> findAll(LocalDate date);
 
-	Todo update(Long id, Todo updateParam);
+	Long update(Long id, Todo updateParam);
 
 	Long delete(Todo todo);
 
 	Optional<Todo> findById(Long id);
 
-	List<Todo> findAllByCategory(Category category);
+	List<Todo> findAllByCategory(Long category);
 
 	List<Todo> findAllByComplete();
+
+	void deleteAllByCategoryId(Long category);
 }

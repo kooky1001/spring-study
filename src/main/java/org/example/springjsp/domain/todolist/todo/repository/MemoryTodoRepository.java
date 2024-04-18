@@ -1,14 +1,12 @@
-package org.example.springjsp.domain.todolist.repository;
+package org.example.springjsp.domain.todolist.todo.repository;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.example.springjsp.domain.todolist.Category;
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -26,15 +24,16 @@ public class MemoryTodoRepository implements TodoRepository {
 
 	@Override
 	public List<Todo> findAll(LocalDate toDate) {
-		return store.values().stream().filter(todo -> todo.getToDate().isEqual(toDate)).collect(Collectors.toList());
+		// return store.values().stream().filter(todo -> todo.getToDate().isEqual(toDate)).collect(Collectors.toList());
+		return null;
 	}
 
 	@Override
-	public Todo update(Long id, Todo updateParam) {
+	public Long update(Long id, Todo updateParam) {
 		Todo todo = store.get(id);
-		todo.setCompleted(updateParam.isCompleted());
+		// todo.setCompleted(updateParam.isCompleted());
 		todo.setContent(updateParam.getContent());
-		return todo;
+		return id;
 	}
 
 	@Override
@@ -53,12 +52,16 @@ public class MemoryTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAllByCategory(Category category) {
+	public List<Todo> findAllByCategory(Long category) {
 		return List.of();
 	}
 
 	@Override
 	public List<Todo> findAllByComplete() {
 		return List.of();
+	}
+
+	@Override
+	public void deleteAllByCategoryId(Long id) {
 	}
 }

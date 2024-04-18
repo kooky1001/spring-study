@@ -1,11 +1,10 @@
-package org.example.springjsp.domain.todolist.repository;
+package org.example.springjsp.domain.todolist.todo.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.example.springjsp.domain.todolist.Category;
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -26,14 +25,13 @@ public class MapperTodoRepository implements TodoRepository {
 
 	@Override
 	public List<Todo> findAll(LocalDate date) {
-		List<Todo> list = todoMapper.findAll(date);
-		return list;
+		return todoMapper.findAll(date);
 	}
 
 	@Override
-	public Todo update(Long id, Todo updateParam) {
+	public Long update(Long id, Todo updateParam) {
 		todoMapper.update(id, updateParam);
-		return todoMapper.findById(id).orElse(null);
+		return id;
 	}
 
 	@Override
@@ -49,12 +47,17 @@ public class MapperTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAllByCategory(Category category) {
+	public List<Todo> findAllByCategory(Long category) {
 		return todoMapper.findAllByCategory(category);
 	}
 
 	@Override
 	public List<Todo> findAllByComplete() {
 		return todoMapper.findAllByComplete();
+	}
+
+	@Override
+	public void deleteAllByCategoryId(Long category) {
+		todoMapper.deleteAllByCategoryId(category);
 	}
 }

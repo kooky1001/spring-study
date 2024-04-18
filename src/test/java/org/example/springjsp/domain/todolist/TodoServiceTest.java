@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.example.springjsp.domain.todolist.todo.Todo;
+import org.example.springjsp.domain.todolist.todo.TodoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,11 +56,15 @@ class TodoServiceTest {
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
-		todoService.check(savedTodo.getId(), true);
+		Todo updateParam = Todo.builder().content(todo.getContent())
+			.completed(true)
+			.build();
+
+		todoService.update(savedTodo.getId(), updateParam);
 
 		Todo findTodo = todoService.findById(savedTodo.getId());
 
-		assertThat(true).isEqualTo(findTodo.isCompleted());
+		assertThat(true).isEqualTo(findTodo.getCompleted());
 	}
 
 	@Test
@@ -70,7 +76,7 @@ class TodoServiceTest {
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
-		todoService.delete(savedTodo.getId());
+		todoService.delete(savedTodo);
 		List<Todo> list = todoService.findAll(LocalDate.now());
 
 		assertThat(list).doesNotContain(savedTodo);
@@ -86,7 +92,10 @@ class TodoServiceTest {
 		Todo savedTodo = todoService.save(todo);
 
 		String content = "테스트";
-		todoService.update(savedTodo.getId(), content);
+		Todo updateParam = Todo.builder().content(content)
+			.completed(false)
+			.build();
+		todoService.update(savedTodo.getId(), updateParam);
 		Todo findTodo = todoService.findById(savedTodo.getId());
 
 		assertThat(findTodo.getContent()).isEqualTo(content);
