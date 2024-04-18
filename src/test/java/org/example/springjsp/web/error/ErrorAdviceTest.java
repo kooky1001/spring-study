@@ -1,6 +1,6 @@
 package org.example.springjsp.web.error;
 
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

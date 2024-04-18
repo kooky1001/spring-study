@@ -1,4 +1,4 @@
-package org.example.springjsp.domain.todolist.repository;
+package org.example.springjsp.domain.todolist.todo.repository;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 import org.springframework.stereotype.Repository;
 
 @Repository

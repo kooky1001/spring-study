@@ -1,4 +1,4 @@
-package org.example.springjsp.domain.todolist;
+package org.example.springjsp.domain.todolist.todo;
 
 import java.time.LocalDate;
 

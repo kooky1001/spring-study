@@ -1,10 +1,10 @@
-package org.example.springjsp.domain.todolist.repository;
+package org.example.springjsp.domain.todolist.todo.repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.example.springjsp.domain.todolist.Todo;
+import org.example.springjsp.domain.todolist.todo.Todo;
 
 public interface TodoRepository {
 

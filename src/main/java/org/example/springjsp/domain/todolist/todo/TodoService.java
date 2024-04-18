@@ -1,9 +1,9 @@
-package org.example.springjsp.domain.todolist;
+package org.example.springjsp.domain.todolist.todo;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import org.example.springjsp.domain.todolist.repository.TodoRepository;
+import org.example.springjsp.domain.todolist.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

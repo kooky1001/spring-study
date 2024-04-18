@@ -3,15 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="org.example.springjsp.domain.todolist.repository.TodoMapper">
-    <select id="findAll" resultType="org.example.springjsp.domain.todolist.Todo" parameterType="java.time.LocalDate">
+<mapper namespace="org.example.springjsp.domain.todolist.todo.repository.TodoMapper">
+    <select id="findAll" resultType="org.example.springjsp.domain.todolist.todo.Todo"
+            parameterType="java.time.LocalDate">
         SELECT id, content, completed, toDate
         FROM todo
         where toDate = #{toDate}
         order by completed asc, id asc;
     </select>
 
-    <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.Todo"
+    <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.todo.Todo"
             parameterType="Long">
         SELECT id, content, completed, toDate, category
         FROM todo
@@ -19,14 +20,14 @@
         order by completed asc, id asc;
     </select>
 
-    <select id="findAllByComplete" resultType="org.example.springjsp.domain.todolist.Todo">
+    <select id="findAllByComplete" resultType="org.example.springjsp.domain.todolist.todo.Todo">
         SELECT id, content, completed, toDate, category
         FROM todo
         where completed = true
         order by completed asc, id asc;
     </select>
 
-    <insert id="save" parameterType="org.example.springjsp.domain.todolist.Todo" useGeneratedKeys="true"
+    <insert id="save" parameterType="org.example.springjsp.domain.todolist.todo.Todo" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into todo(content, completed, toDate, category)
         values (#{content},
@@ -35,7 +36,7 @@
                 #{category})
     </insert>
 
-    <select id="findById" resultType="org.example.springjsp.domain.todolist.Todo" parameterType="Long">
+    <select id="findById" resultType="org.example.springjsp.domain.todolist.todo.Todo" parameterType="Long">
         select id, content, completed, toDate, category
         from todo
         where id = #{id}
