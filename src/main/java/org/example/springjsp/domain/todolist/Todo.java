@@ -22,7 +22,7 @@ public class Todo {
 	@Schema(description = "할 일 내용", example = "오늘 할 일 내용입니다.")
 	private String content;
 	@Schema(description = "완료 여부", example = "false")
-	private boolean completed;
+	private Boolean completed;
 	@Schema(description = "할 일의 날짜 - 현재 사용하지 않음", example = "null", deprecated = true)
 	private LocalDate toDate;
 	@Schema(description = "카테고리 id", example = "1")
@@ -34,7 +34,11 @@ public class Todo {
 	public Todo(String content, boolean completed, LocalDate date, Long category) {
 		this.content = content;
 		this.completed = completed;
-		this.toDate = date;
 		this.category = category;
+	}
+
+	public void update(String content, boolean completed) {
+		this.content = content;
+		this.completed = completed;
 	}
 }

@@ -12,7 +12,7 @@ public interface TodoRepository {
 
 	List<Todo> findAll(LocalDate date);
 
-	Todo update(Long id, Todo updateParam);
+	Long update(Long id, Todo updateParam);
 
 	Long delete(Todo todo);
 

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.example.springjsp.domain.todolist.Todo;
 import org.springframework.stereotype.Repository;
@@ -25,15 +24,16 @@ public class MemoryTodoRepository implements TodoRepository {
 
 	@Override
 	public List<Todo> findAll(LocalDate toDate) {
-		return store.values().stream().filter(todo -> todo.getToDate().isEqual(toDate)).collect(Collectors.toList());
+		// return store.values().stream().filter(todo -> todo.getToDate().isEqual(toDate)).collect(Collectors.toList());
+		return null;
 	}
 
 	@Override
-	public Todo update(Long id, Todo updateParam) {
+	public Long update(Long id, Todo updateParam) {
 		Todo todo = store.get(id);
-		todo.setCompleted(updateParam.isCompleted());
+		// todo.setCompleted(updateParam.isCompleted());
 		todo.setContent(updateParam.getContent());
-		return todo;
+		return id;
 	}
 
 	@Override

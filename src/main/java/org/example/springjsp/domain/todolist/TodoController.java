@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -32,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TodoController {
 
 	private final TodoService todoService;
+	private final ObjectMapper objectMapper;
 
 	@Operation(summary = "할 일 저장", description = "할 일을 투두리스트에 추가")
 	@Parameters({
@@ -68,19 +72,26 @@ public class TodoController {
 		return todoService.findAllByComplete();
 	}
 
-	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경 / 상태변경")
+	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경 / 체크상태변경")
 	@Parameters({
 		@Parameter(name = "id", description = "할 일 id", example = "1", in = ParameterIn.PATH),
 		@Parameter(name = "content", description = "변경될 내용", example = "변경될 할 일 내용입니다."),
 		@Parameter(name = "completed", description = "체크여부", example = "true")
 	})
 	@PutMapping("{id}")
-	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
+	public Todo update(@PathVariable Long id, @RequestBody String todo) throws JsonProcessingException {
+		Todo updateParam = objectMapper.readValue(todo, Todo.class);
 		log.info("updateParam={}", updateParam);
-		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
-			throw new IllegalArgumentException("내용은 필수입니다.");
+
+		if (updateParam.getContent() == null && updateParam.getCompleted() == null) {
+			throw new IllegalArgumentException("내용 또는 완료여부 중 하나는 필수입니다.");
 		}
-		return todoService.update(id, updateParam);
+
+		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
+			return todoService.update(id, updateParam);
+		} else {
+			return todoService.updateAll(id, updateParam);
+		}
 	}
 
 	@Operation(summary = "할 일 삭제", description = "할 일을 리스트에서 삭제")
@@ -88,7 +99,7 @@ public class TodoController {
 	@DeleteMapping("{id}")
 	public Todo delete(@PathVariable Long id) {
 		Todo todo = todoService.findById(id);
-		todoService.delete(id);
+		todoService.delete(todo);
 		return todo;
 	}
 

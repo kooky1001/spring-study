@@ -25,14 +25,13 @@ public class MapperTodoRepository implements TodoRepository {
 
 	@Override
 	public List<Todo> findAll(LocalDate date) {
-		List<Todo> list = todoMapper.findAll(date);
-		return list;
+		return todoMapper.findAll(date);
 	}
 
 	@Override
-	public Todo update(Long id, Todo updateParam) {
+	public Long update(Long id, Todo updateParam) {
 		todoMapper.update(id, updateParam);
-		return todoMapper.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. id: " + id));
+		return id;
 	}
 
 	@Override

@@ -14,10 +14,6 @@ public class TodoService {
 
 	private final TodoRepository todoRepository;
 
-	// @PostConstruct
-	// public void init() {
-	// }
-
 	public Todo save(Todo todo) {
 		return todoRepository.save(todo);
 	}
@@ -31,11 +27,22 @@ public class TodoService {
 	}
 
 	public Todo update(Long id, Todo updateParam) {
-		return todoRepository.update(id, updateParam);
+		Todo findTodo = findById(id);
+		boolean completed = updateParam.getCompleted() != null && updateParam.getCompleted();
+		findTodo.update(findTodo.getContent(), completed);
+		todoRepository.update(id, findTodo);
+		return findTodo;
 	}
 
-	public Long delete(Long id) {
-		Todo todo = findById(id);
+	public Todo updateAll(Long id, Todo updateParam) {
+		Todo findTodo = findById(id);
+		boolean completed = updateParam.getCompleted() != null && updateParam.getCompleted();
+		findTodo.update(updateParam.getContent(), completed);
+		todoRepository.update(id, findTodo);
+		return findTodo;
+	}
+
+	public Long delete(Todo todo) {
 		return todoRepository.delete(todo);
 	}
 

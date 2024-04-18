@@ -62,7 +62,7 @@ class TodoServiceTest {
 
 		Todo findTodo = todoService.findById(savedTodo.getId());
 
-		assertThat(true).isEqualTo(findTodo.isCompleted());
+		assertThat(true).isEqualTo(findTodo.getCompleted());
 	}
 
 	@Test
@@ -74,7 +74,7 @@ class TodoServiceTest {
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
-		todoService.delete(savedTodo.getId());
+		todoService.delete(savedTodo);
 		List<Todo> list = todoService.findAll(LocalDate.now());
 
 		assertThat(list).doesNotContain(savedTodo);
