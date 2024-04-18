@@ -2,17 +2,20 @@ package org.example.springjsp.domain.todolist.category;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -34,15 +37,20 @@ public class CategoryController {
 	@Parameter(name = "id", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
 	@DeleteMapping("{id}")
 	public Category delete(@PathVariable Long id) {
-		Category find = categoryService.findOne(id);
+		Category findCategory = categoryService.findOne(id);
 		categoryService.delete(id);
-		return find;
+		return findCategory;
 	}
 
 	@Operation(summary = "카테고리 저장", description = "신규 카테고리 추가")
 	@Parameter(name = "name", description = "카테고리 이름", example = "기타")
+	@ApiResponse(responseCode = "201")
+	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public Category save(@RequestBody Category category) {
+		if (category.getName() == null || category.getName().isBlank()) {
+			throw new IllegalArgumentException("카테고리 이름은 필수입니다.");
+		}
 		return categoryService.save(category);
 	}
 }

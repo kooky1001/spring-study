@@ -27,7 +27,7 @@ public class TodoService {
 	}
 
 	public Todo findById(Long id) {
-		return todoRepository.findById(id).orElse(null);
+		return todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. id: " + id));
 	}
 
 	public Todo update(Long id, String content) {
