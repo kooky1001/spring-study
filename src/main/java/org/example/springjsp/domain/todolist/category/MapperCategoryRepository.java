@@ -44,6 +44,6 @@ public class MapperCategoryRepository implements CategoryRepository {
 	@Override
 	public Category update(Long id, Category updateParam) {
 		categoryMapper.update(id, updateParam);
-		return findById(id).orElse(null);
+		return findById(id).orElseThrow(() -> new IllegalArgumentException("해당 카테고리가 없습니다. id: " + id));
 	}
 }
