@@ -30,21 +30,7 @@ public class TodoService {
 		return todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. id: " + id));
 	}
 
-	public Todo update(Long id, String content) {
-		Todo todo = findById(id);
-		Todo updateParam = Todo.builder()
-			.content(content)
-			.completed(todo.isCompleted())
-			.build();
-		return todoRepository.update(id, updateParam);
-	}
-
-	public Todo check(Long id, boolean completed) {
-		Todo todo = findById(id);
-		Todo updateParam = Todo.builder()
-			.content(todo.getContent())
-			.completed(completed)
-			.build();
+	public Todo update(Long id, Todo updateParam) {
 		return todoRepository.update(id, updateParam);
 	}
 

@@ -57,8 +57,8 @@ public class TodoController {
 
 	@Operation(summary = "할 일 조회", description = "카테고리별 할 일을 조회")
 	@Parameter(name = "category", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
-	@GetMapping("{id}")
-	public List<Todo> listByCategory(@PathVariable("id") Long category) {
+	@GetMapping("{categoryId}")
+	public List<Todo> listByCategory(@PathVariable("categoryId") Long category) {
 		return todoService.findAllByCategory(category);
 	}
 
@@ -68,14 +68,19 @@ public class TodoController {
 		return todoService.findAllByComplete();
 	}
 
-	@Operation(summary = "할 일 체크", description = "완료 또는 취소 시 할 일을 체크")
+	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경 / 상태변경")
 	@Parameters({
 		@Parameter(name = "id", description = "할 일 id", example = "1", in = ParameterIn.PATH),
+		@Parameter(name = "content", description = "변경될 내용", example = "변경될 할 일 내용입니다."),
 		@Parameter(name = "completed", description = "체크여부", example = "true")
 	})
-	@PutMapping("{id}/checked")
-	public Todo check(@PathVariable Long id, @RequestBody Todo todo) {
-		return todoService.check(id, todo.isCompleted());
+	@PutMapping("{id}")
+	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
+		log.info("updateParam={}", updateParam);
+		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
+			throw new IllegalArgumentException("내용은 필수입니다.");
+		}
+		return todoService.update(id, updateParam);
 	}
 
 	@Operation(summary = "할 일 삭제", description = "할 일을 리스트에서 삭제")
@@ -85,19 +90,6 @@ public class TodoController {
 		Todo todo = todoService.findById(id);
 		todoService.delete(id);
 		return todo;
-	}
-
-	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경")
-	@Parameters({
-		@Parameter(name = "id", description = "할 일 id", example = "1", in = ParameterIn.PATH),
-		@Parameter(name = "content", description = "변경될 내용", example = "변경될 할 일 내용입니다.")
-	})
-	@PutMapping("{id}")
-	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
-		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
-			throw new IllegalArgumentException("내용은 필수입니다.");
-		}
-		return todoService.update(id, updateParam.getContent());
 	}
 
 }

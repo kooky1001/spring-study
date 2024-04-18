@@ -56,15 +56,8 @@
             let item = e.target.closest(".todoItem");
             let id = $(item).find("input[name='id']").val();
             let checked = $(item).find("input:checkbox").is(":checked");
-            check(id, checked);
-        });
-
-        $("#list").on('click', ".deleteBtn", (e) => {
-            let item = e.target.closest(".todoItem");
-            let id = $(item).find("input[name='id']").val();
-            if (confirm("삭제하시겠습니까?")) {
-                deleteTodo(id);
-            }
+            let todoContent = $(item).find(".todoContent").html();
+            updateTodo(id, todoContent, checked);
         });
 
         $("#list").on('click', ".updateBtn", (e) => {
@@ -78,7 +71,15 @@
             let todoContent = $(item).find(".todoContent").html();
             let content = prompt("수정할 내용을 입력해주세요.", todoContent);
             if (content) {
-                updateTodo(id, content);
+                updateTodo(id, content, checked);
+            }
+        });
+
+        $("#list").on('click', ".deleteBtn", (e) => {
+            let item = e.target.closest(".todoItem");
+            let id = $(item).find("input[name='id']").val();
+            if (confirm("삭제하시겠습니까?")) {
+                deleteTodo(id);
             }
         });
 
@@ -172,12 +173,12 @@
         });
     }
 
-    function check(id, checked) {
+    function updateTodo(id, content, checked) {
         $.ajax({
-            url: `todolist/\${id}/checked`,
+            url: `todolist/\${id}`,
             method: "put",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({completed: checked}),
+            data: JSON.stringify({content: content, completed: checked}),
             success: (data) => {
                 findAllByCategory(data.category);
             },
@@ -192,21 +193,6 @@
             url: `todolist/\${id}`,
             method: "delete",
             contentType: "application/json; charset=utf-8",
-            success: (data) => {
-                findAllByCategory(data.category);
-            },
-            error: (err) => {
-                alert(errMessage(err));
-            }
-        });
-    }
-
-    function updateTodo(id, content) {
-        $.ajax({
-            url: `todolist/\${id}`,
-            method: "put",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({content: content}),
             success: (data) => {
                 findAllByCategory(data.category);
             },

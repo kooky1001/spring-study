@@ -54,7 +54,11 @@ class TodoServiceTest {
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
-		todoService.check(savedTodo.getId(), true);
+		Todo updateParam = Todo.builder().content(todo.getContent())
+			.completed(true)
+			.build();
+
+		todoService.update(savedTodo.getId(), updateParam);
 
 		Todo findTodo = todoService.findById(savedTodo.getId());
 
@@ -86,7 +90,10 @@ class TodoServiceTest {
 		Todo savedTodo = todoService.save(todo);
 
 		String content = "테스트";
-		todoService.update(savedTodo.getId(), content);
+		Todo updateParam = Todo.builder().content(content)
+			.completed(false)
+			.build();
+		todoService.update(savedTodo.getId(), updateParam);
 		Todo findTodo = todoService.findById(savedTodo.getId());
 
 		assertThat(findTodo.getContent()).isEqualTo(content);
