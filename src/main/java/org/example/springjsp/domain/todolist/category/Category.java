@@ -17,12 +17,9 @@ public class Category {
 	private Long id;
 	@Schema(description = "카테고리 이름", example = "기타")
 	private String name;
-	@Schema(description = "카테고리 사용여부 - 현재 사용하지 않음", example = "true", deprecated = true)
-	private boolean active;
 
 	@Builder
-	public Category(String name, boolean active) {
+	public Category(String name) {
 		this.name = name;
-		this.active = active;
 	}
 }

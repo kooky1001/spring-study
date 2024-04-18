@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface CategoryRepository {
 	List<Category> findAll();
 
-	List<Category> findAllByActive();
+	// List<Category> findAllByActive();
 
 	Category save(Category category);
 
@@ -14,5 +14,5 @@ public interface CategoryRepository {
 
 	Optional<Category> findById(Long id);
 
-	Category update(Long id, Category updateParam);
+	// Category update(Long id, Category updateParam);
 }

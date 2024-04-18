@@ -18,10 +18,10 @@ public class MapperCategoryRepository implements CategoryRepository {
 		return categoryMapper.findAll();
 	}
 
-	@Override
-	public List<Category> findAllByActive() {
-		return categoryMapper.findAllByActive();
-	}
+	// @Override
+	// public List<Category> findAllByActive() {
+	// 	return categoryMapper.findAllByActive();
+	// }
 
 	@Override
 	public Category save(Category category) {
@@ -41,9 +41,4 @@ public class MapperCategoryRepository implements CategoryRepository {
 		return categoryMapper.findById(id);
 	}
 
-	@Override
-	public Category update(Long id, Category updateParam) {
-		categoryMapper.update(id, updateParam);
-		return findById(id).orElseThrow(() -> new IllegalArgumentException("해당 카테고리가 없습니다. id: " + id));
-	}
 }

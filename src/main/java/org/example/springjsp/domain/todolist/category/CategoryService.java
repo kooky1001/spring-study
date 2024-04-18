@@ -18,9 +18,9 @@ public class CategoryService {
 		return categoryRepository.findAll();
 	}
 
-	public List<Category> findAllByActive() {
-		return categoryRepository.findAllByActive();
-	}
+	// public List<Category> findAllByActive() {
+	// 	return categoryRepository.findAllByActive();
+	// }
 
 	public Category findOne(Long id) {
 		return categoryRepository.findById(id)
@@ -35,12 +35,5 @@ public class CategoryService {
 		Category category = findOne(id);
 		todoRepository.deleteAllByCategoryId(category.getId());
 		return categoryRepository.delete(category);
-	}
-
-	public Category update(Long id, Category updateParam) {
-		Category category = Category.builder()
-			.active(updateParam.isActive())
-			.build();
-		return categoryRepository.update(id, updateParam);
 	}
 }

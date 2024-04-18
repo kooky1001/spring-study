@@ -18,7 +18,6 @@ class CategoryServiceTest {
 	void findAll() {
 		Category category = Category.builder()
 			.name("테스트")
-			.active(true)
 			.build();
 
 		categoryService.save(category);
@@ -29,23 +28,9 @@ class CategoryServiceTest {
 	}
 
 	@Test
-	void findAllByActive() {
-		Category category = Category.builder()
-			.name("테스트")
-			.active(false)
-			.build();
-
-		categoryService.save(category);
-
-		List<Category> categories = categoryService.findAllByActive();
-		System.out.println("categories = " + categories);
-	}
-
-	@Test
 	void findOne() {
 		Category category = Category.builder()
 			.name("테스트")
-			.active(true)
 			.build();
 
 		Category saved = categoryService.save(category);
@@ -58,7 +43,6 @@ class CategoryServiceTest {
 	void save() {
 		Category category = Category.builder()
 			.name("테스트")
-			.active(true)
 			.build();
 
 		Category saved = categoryService.save(category);
@@ -70,26 +54,12 @@ class CategoryServiceTest {
 	void delete() {
 		Category category = Category.builder()
 			.name("테스트")
-			.active(true)
 			.build();
 
 		Category saved = categoryService.save(category);
 		categoryService.delete(saved.getId());
 
 		assertThat(categoryService.findOne(saved.getId())).isNull();
-	}
-
-	@Test
-	void update() {
-		Category category = Category.builder()
-			.name("테스트")
-			.active(true)
-			.build();
-		Category saved = categoryService.save(category);
-
-		categoryService.update(saved.getId(), Category.builder().active(false).build());
-
-		assertThat(categoryService.findOne(saved.getId()).isActive()).isEqualTo(false);
 	}
 
 }
