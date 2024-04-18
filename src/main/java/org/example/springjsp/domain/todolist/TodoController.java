@@ -49,8 +49,8 @@ public class TodoController {
 
 	@Operation(summary = "할 일 조회", description = "카테고리별 할 일을 조회")
 	@Parameter(name = "category", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
-	@GetMapping("{category}")
-	public List<Todo> listByCategory(@PathVariable Long category) {
+	@GetMapping("{id}")
+	public List<Todo> listByCategory(@PathVariable("id") Long category) {
 		List<Todo> todoList = todoService.findAllByCategory(category);
 		return todoList;
 	}
