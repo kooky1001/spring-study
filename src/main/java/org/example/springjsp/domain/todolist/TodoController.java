@@ -20,7 +20,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +38,7 @@ public class TodoController {
 		@Parameter(name = "content", description = "할 일 내용", example = "할 일 내용입니다.", required = true),
 		@Parameter(name = "category", description = "할 일의 카테고리 id", example = "1", required = true)
 	})
-	@ApiResponses({
-		@ApiResponse(responseCode = "201")
-	})
+	@ApiResponse(responseCode = "201")
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public Todo save(@RequestBody Todo todo) {
@@ -97,6 +94,9 @@ public class TodoController {
 	})
 	@PutMapping("{id}")
 	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
+		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
+			throw new IllegalArgumentException("내용은 필수입니다.");
+		}
 		return todoService.update(id, updateParam.getContent());
 	}
 
