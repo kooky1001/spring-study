@@ -16,13 +16,13 @@ public class Category {
 	@Schema(description = "카테고리 id", example = "1")
 	private Long id;
 	@Schema(description = "카테고리 이름", example = "기타")
-	private String description;
+	private String name;
 	@Schema(description = "카테고리 사용여부 - 현재 사용하지 않음", example = "true", deprecated = true)
 	private boolean active;
 
 	@Builder
-	public Category(String description, boolean active) {
-		this.description = description;
+	public Category(String name, boolean active) {
+		this.name = name;
 		this.active = active;
 	}
 }

@@ -14,7 +14,7 @@
         <div id="categoryList"></div>
         <footer>
             <fieldset role="group">
-                <input type="text" name="content" id="categoryDescription" placeholder="카테고리 추가"/>
+                <input type="text" name="content" id="categoryNameInput" placeholder="카테고리 추가"/>
                 <input type="submit" value="등록" onclick="saveCategory()"/>
             </fieldset>
         </footer>
@@ -82,11 +82,11 @@
             }
         });
 
-        $("#categoryList").on('click', ".description", (e) => {
+        $("#categoryList").on('click', ".categoryName", (e) => {
             let item = e.target.closest(".categoryItem");
             let id = $(item).find("input[name='id']").val();
-            let description = $(item).find(".description").html();
-            findAllByCategory(id, description);
+            let categoryName = $(item).find(".categoryName").html();
+            findAllByCategory(id, categoryName);
         });
 
         $("#categoryList").on('click', ".deleteBtn", (e) => {
@@ -128,10 +128,10 @@
         }
     }
 
-    function findAllByCategory(category, description) {
-        if (description) {
+    function findAllByCategory(category, categoryName) {
+        if (categoryName) {
             $("#categoryId").val(category);
-            $("#title").html(description);
+            $("#title").html(categoryName);
         }
 
         $.get({
@@ -229,7 +229,7 @@
                 listOfCategory(data);
 
                 if (data.length > 0 && !$("#categoryId").val()) {
-                    findAllByCategory(data[0].id, data[0].description);
+                    findAllByCategory(data[0].id, data[0].name);
                 }
             }, error: (err) => {
                 alert(errMessage(err));
@@ -243,7 +243,7 @@
             let item = `<nav class="categoryItem">
                             <input type="hidden" name="id" value="\${category.id}"/>
                             <ul>
-                                <li><strong> * <a href="javascript:void(0)" class="description">\${category.description}</a></strong></li>
+                                <li><strong> * <a href="javascript:void(0)" class="categoryName">\${category.name}</a></strong></li>
                             </ul>
                             <ul>
                                 <li>
@@ -276,9 +276,9 @@
     }
 
     function saveCategory() {
-        let description = $("#categoryDescription").val();
+        let name = $("#categoryNameInput").val();
 
-        if (!description) {
+        if (!name) {
             return;
         }
 
@@ -289,10 +289,10 @@
         $.post({
             url: "todolist/category",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({description: description}),
+            data: JSON.stringify({name: name}),
             success: (data) => {
                 findAllCategory();
-                $("#categoryDescription").val("");
+                $("#categoryNameInput").val("");
                 alert("등록되었습니다.")
             }, error: (err) => {
                 alert(errMessage(err));

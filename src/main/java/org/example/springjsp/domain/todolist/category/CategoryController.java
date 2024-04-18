@@ -40,7 +40,7 @@ public class CategoryController {
 	}
 
 	@Operation(summary = "카테고리 저장", description = "신규 카테고리 추가")
-	@Parameter(name = "description", description = "카테고리 이름", example = "기타")
+	@Parameter(name = "name", description = "카테고리 이름", example = "기타")
 	@PostMapping
 	public Category save(@RequestBody Category category) {
 		return categoryService.save(category);

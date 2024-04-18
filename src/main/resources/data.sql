@@ -8,7 +8,7 @@ values ('테스트1번 입니다.', false, '2024-04-15', 1);
 insert into todo(content, completed, toDate, category)
 values ('테스트2번 입니다.', false, '2024-04-15', 1);
 
-insert into category(description, active)
+insert into category(name, active)
 values ('업무', true);
-insert into category(description, active)
+insert into category(name, active)
 values ('개인', true);

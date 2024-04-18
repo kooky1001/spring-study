@@ -5,28 +5,28 @@
 
 <mapper namespace="org.example.springjsp.domain.todolist.category.CategoryMapper">
     <select id="findAll" resultType="org.example.springjsp.domain.todolist.category.Category">
-        SELECT id, description, active
+        SELECT id, name, active
         FROM category
         order by id asc;
     </select>
 
     <select id="findAllByActive" resultType="org.example.springjsp.domain.todolist.category.Category">
-        SELECT id, description, active
+        SELECT id, name, active
         FROM category
         where active = true
         order by id asc;
     </select>
 
     <select id="findById" resultType="org.example.springjsp.domain.todolist.category.Category" parameterType="Long">
-        SELECT id, description, active
+        SELECT id, name, active
         FROM category
         where id = #{id}
     </select>
 
     <insert id="save" parameterType="org.example.springjsp.domain.todolist.category.Category" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
-        insert into category(description, active)
-        values (#{description},
+        insert into category(name, active)
+        values (#{name},
                 true)
     </insert>
 
