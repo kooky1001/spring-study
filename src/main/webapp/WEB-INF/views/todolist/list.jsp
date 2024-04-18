@@ -134,10 +134,9 @@
             $("#title").html(description);
         }
 
-        $.ajax({
-            url: "todolist/list",
-            method: "get",
-            data: {category: category},
+        $.get({
+            url: `todolist/\${category}`,
+            contentType: "application/json; charset=utf-8",
             success: (data) => {
                 listOfTodoByCategory(data);
             },
@@ -159,10 +158,10 @@
             return;
         }
 
-        $.ajax({
+        $.post({
             url: "todolist",
-            method: "post",
-            data: {content: content, category: category},
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({content: content, category: category}),
             success: (data) => {
                 findAllByCategory(data.category);
                 $("#content").val("");
@@ -175,9 +174,10 @@
 
     function check(id, checked) {
         $.ajax({
-            url: "todolist/checked",
+            url: `todolist/\${id}/checked`,
             method: "put",
-            data: {id: id, completed: checked},
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({completed: checked}),
             success: (data) => {
                 findAllByCategory(data.category);
             },
@@ -189,9 +189,9 @@
 
     function deleteTodo(id) {
         $.ajax({
-            url: "todolist",
+            url: `todolist/\${id}`,
             method: "delete",
-            data: {id: id},
+            contentType: "application/json; charset=utf-8",
             success: (data) => {
                 findAllByCategory(data.category);
             },
@@ -203,9 +203,10 @@
 
     function updateTodo(id, content) {
         $.ajax({
-            url: "todolist",
+            url: `todolist/\${id}`,
             method: "put",
-            data: {id: id, content: content},
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({content: content}),
             success: (data) => {
                 findAllByCategory(data.category);
             },
