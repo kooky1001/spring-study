@@ -16,7 +16,7 @@ public class MemoryTodoRepository implements TodoRepository {
 
 	@Override
 	public Todo save(Todo todo) {
-		todo.setId(++sequence);
+		// todo.setId(++sequence);
 		store.put(todo.getId(), todo);
 		return todo;
 	}
@@ -31,7 +31,7 @@ public class MemoryTodoRepository implements TodoRepository {
 	public Long update(Long id, Todo updateParam) {
 		Todo todo = store.get(id);
 		// todo.setCompleted(updateParam.isCompleted());
-		todo.setContent(updateParam.getContent());
+		// todo.setContent(updateParam.getContent());
 		return id;
 	}
 

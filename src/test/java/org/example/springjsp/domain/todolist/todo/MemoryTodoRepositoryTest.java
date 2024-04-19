@@ -1,8 +1,7 @@
-package org.example.springjsp.domain.todolist;
+package org.example.springjsp.domain.todolist.todo;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.example.springjsp.domain.todolist.todo.Todo;
 import org.example.springjsp.domain.todolist.todo.repository.MemoryTodoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
