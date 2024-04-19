@@ -7,7 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @SpringBootTest
 class CategoryServiceTest {
 
@@ -19,11 +21,16 @@ class CategoryServiceTest {
 		Category category = Category.builder()
 			.name("테스트")
 			.build();
+		Category save = categoryService.save(category);
 
-		categoryService.save(category);
+		//when
+		List<Category> categoryList = categoryService.findAll();
 
-		List<Category> categories = categoryService.findAll();
-		System.out.println("categories = " + categories);
+		//then
+		assertThat(categoryList).hasSizeGreaterThanOrEqualTo(1);
+		assertThat(categoryList).filteredOn(c -> c.getId().equals(save.getId()))
+			.extracting(Category::getId, Category::getName)
+			.contains(tuple(save.getId(), save.getName()));
 		// assertThat(categories).contains(category);
 	}
 
@@ -33,10 +40,11 @@ class CategoryServiceTest {
 			.name("테스트")
 			.build();
 
-		Category saved = categoryService.save(category);
-		Category find = categoryService.findOne(saved.getId());
+		Category save = categoryService.save(category);
+		Category find = categoryService.findOne(save.getId());
 
-		assertThat(saved.getId()).isEqualTo(find.getId());
+		assertThat(save.getId()).isEqualTo(find.getId());
+		assertThat(save.getName()).isEqualTo(find.getName());
 	}
 
 	@Test
@@ -45,9 +53,9 @@ class CategoryServiceTest {
 			.name("테스트")
 			.build();
 
-		Category saved = categoryService.save(category);
+		Category save = categoryService.save(category);
 
-		assertThat(saved.getId()).isNotNull();
+		assertThat(save.getId()).isNotNull();
 	}
 
 	@Test
@@ -56,10 +64,11 @@ class CategoryServiceTest {
 			.name("테스트")
 			.build();
 
-		Category saved = categoryService.save(category);
-		categoryService.delete(saved.getId());
+		Category save = categoryService.save(category);
+		categoryService.delete(save.getId());
 
-		assertThat(categoryService.findOne(saved.getId())).isNull();
+		assertThatThrownBy(() -> categoryService.findOne(save.getId())).isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining(String.valueOf(save.getId()));
 	}
 
 }
