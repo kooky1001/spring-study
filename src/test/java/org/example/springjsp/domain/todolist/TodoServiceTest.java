@@ -2,9 +2,6 @@ package org.example.springjsp.domain.todolist;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import org.example.springjsp.domain.todolist.todo.Todo;
 import org.example.springjsp.domain.todolist.todo.TodoService;
 import org.junit.jupiter.api.Test;
@@ -23,12 +20,12 @@ class TodoServiceTest {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
-			.date(LocalDate.now())
+			// .date(LocalDate.now())
 			.build();
 		todoService.save(todo);
 
-		List<Todo> list = todoService.findAll(LocalDate.now());
-		System.out.println("list = " + list);
+		// List<Todo> list = todoService.findAll(LocalDate.now());
+		// System.out.println("list = " + list);
 		// assertThat(list).contains(todo);
 
 	}
@@ -38,7 +35,7 @@ class TodoServiceTest {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
-			.date(LocalDate.now())
+			// .date(LocalDate.now())
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
@@ -52,7 +49,7 @@ class TodoServiceTest {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
-			.date(LocalDate.now())
+			// .date(LocalDate.now())
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
@@ -72,14 +69,14 @@ class TodoServiceTest {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
-			.date(LocalDate.now())
+			// .date(LocalDate.now())
 			.build();
 		Todo savedTodo = todoService.save(todo);
 
 		todoService.delete(savedTodo);
-		List<Todo> list = todoService.findAll(LocalDate.now());
+		// List<Todo> list = todoService.findAll(LocalDate.now());
 
-		assertThat(list).doesNotContain(savedTodo);
+		// assertThat(list).doesNotContain(savedTodo);
 	}
 
 	@Test
@@ -87,7 +84,7 @@ class TodoServiceTest {
 		Todo todo = Todo.builder()
 			.content("test")
 			.completed(false)
-			.date(LocalDate.now())
+			// .date(LocalDate.now())
 			.build();
 		Todo savedTodo = todoService.save(todo);
 

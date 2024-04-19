@@ -1,6 +1,5 @@
 package org.example.springjsp.domain.todolist.todo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,21 +53,15 @@ public class TodoController {
 	// 날짜별 조회
 	// @ResponseBody
 	// @GetMapping("list")
-	public List<Todo> listByDate(@RequestParam LocalDate toDate) {
-		return todoService.findAll(toDate);
-	}
+	// public List<Todo> listByDate(@RequestParam LocalDate toDate) {
+	// 	return todoService.findAll(toDate);
+	// }
 
 	@Operation(summary = "할 일 조회", description = "카테고리별 할 일을 조회")
 	@Parameter(name = "category", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
 	@GetMapping("{categoryId}")
 	public List<Todo> listByCategory(@PathVariable("categoryId") Long category) {
 		return todoService.findAllByCategory(category);
-	}
-
-	// 완료목록만 조회
-	// @GetMapping("complete")
-	public List<Todo> listBycomplete() {
-		return todoService.findAllByComplete();
 	}
 
 	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경 / 체크상태변경")
