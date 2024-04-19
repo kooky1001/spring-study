@@ -1,6 +1,5 @@
 package org.example.springjsp.domain.todolist.todo.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +22,10 @@ public class MapperTodoRepository implements TodoRepository {
 		return todo;
 	}
 
-	@Override
-	public List<Todo> findAll(LocalDate date) {
-		return todoMapper.findAll(date);
-	}
+	// @Override
+	// public List<Todo> findAll(LocalDate date) {
+	// 	return todoMapper.findAll(date);
+	// }
 
 	@Override
 	public Long update(Long id, Todo updateParam) {
@@ -49,11 +48,6 @@ public class MapperTodoRepository implements TodoRepository {
 	@Override
 	public List<Todo> findAllByCategory(Long category) {
 		return todoMapper.findAllByCategory(category);
-	}
-
-	@Override
-	public List<Todo> findAllByComplete() {
-		return todoMapper.findAllByComplete();
 	}
 
 	@Override

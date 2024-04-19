@@ -4,13 +4,13 @@
 
 
 <mapper namespace="org.example.springjsp.domain.todolist.todo.repository.TodoMapper">
-    <select id="findAll" resultType="org.example.springjsp.domain.todolist.todo.Todo"
-            parameterType="java.time.LocalDate">
-        SELECT id, content, completed, toDate
-        FROM todo
-        where toDate = #{toDate}
-        order by completed asc, id asc;
-    </select>
+    <!--    <select id="findAll" resultType="org.example.springjsp.domain.todolist.todo.Todo"-->
+    <!--            parameterType="java.time.LocalDate">-->
+    <!--        SELECT id, content, completed, toDate-->
+    <!--        FROM todo-->
+    <!--        where toDate = #{toDate}-->
+    <!--        order by completed asc, id asc;-->
+    <!--    </select>-->
 
     <select id="findAllByCategory" resultType="org.example.springjsp.domain.todolist.todo.Todo"
             parameterType="Long">
@@ -20,19 +20,12 @@
         order by completed asc, id asc;
     </select>
 
-    <select id="findAllByComplete" resultType="org.example.springjsp.domain.todolist.todo.Todo">
-        SELECT id, content, completed, toDate, category
-        FROM todo
-        where completed = true
-        order by completed asc, id asc;
-    </select>
-
     <insert id="save" parameterType="org.example.springjsp.domain.todolist.todo.Todo" useGeneratedKeys="true"
             keyColumn="id" keyProperty="id">
         insert into todo(content, completed, toDate, category)
         values (#{content},
                 #{completed},
-                #{toDate},
+                null,
                 #{category})
     </insert>
 

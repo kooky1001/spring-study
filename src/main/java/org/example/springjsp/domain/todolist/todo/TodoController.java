@@ -1,6 +1,5 @@
 package org.example.springjsp.domain.todolist.todo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -11,12 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,17 +20,14 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "TodoList", description = "투두리스트 관련 Api")
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/todolist")
 @RestController
 public class TodoController {
 
 	private final TodoService todoService;
-	private final ObjectMapper objectMapper;
 
 	@Operation(summary = "할 일 저장", description = "할 일을 투두리스트에 추가")
 	@Parameters({
@@ -55,21 +47,15 @@ public class TodoController {
 	// 날짜별 조회
 	// @ResponseBody
 	// @GetMapping("list")
-	public List<Todo> listByDate(@RequestParam LocalDate toDate) {
-		return todoService.findAll(toDate);
-	}
+	// public List<Todo> listByDate(@RequestParam LocalDate toDate) {
+	// 	return todoService.findAll(toDate);
+	// }
 
 	@Operation(summary = "할 일 조회", description = "카테고리별 할 일을 조회")
 	@Parameter(name = "category", description = "카테고리 id", example = "1", in = ParameterIn.PATH)
 	@GetMapping("{categoryId}")
 	public List<Todo> listByCategory(@PathVariable("categoryId") Long category) {
 		return todoService.findAllByCategory(category);
-	}
-
-	// 완료목록만 조회
-	// @GetMapping("complete")
-	public List<Todo> listBycomplete() {
-		return todoService.findAllByComplete();
 	}
 
 	@Operation(summary = "할 일 수정", description = "이미 저장된 할 일의 내용을 변경 / 체크상태변경")
@@ -79,10 +65,7 @@ public class TodoController {
 		@Parameter(name = "completed", description = "체크여부", example = "true")
 	})
 	@PutMapping("{id}")
-	public Todo update(@PathVariable Long id, @RequestBody String todo) throws JsonProcessingException {
-		Todo updateParam = objectMapper.readValue(todo, Todo.class);
-		log.info("updateParam={}", updateParam);
-
+	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
 		if (updateParam.getContent() == null && updateParam.getCompleted() == null) {
 			throw new IllegalArgumentException("내용 또는 완료여부 중 하나는 필수입니다.");
 		}

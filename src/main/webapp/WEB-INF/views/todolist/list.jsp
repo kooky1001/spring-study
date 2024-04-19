@@ -39,7 +39,7 @@
 </div>
 
 <script>
-    $(document).ready(() => {
+    $(() => {
         /* date로 구분
         $("#toDate").change(() => {
             let toDate = $("#toDate").val();
