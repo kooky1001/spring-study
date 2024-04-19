@@ -46,6 +46,7 @@ public class ErrorAdvice {
 	@ExceptionHandler
 	private ErrorResponse internalServerError(RuntimeException ex) {
 		executeLog(ex);
+		log.info("Internal Server Error", ex);
 		String message = "서버 내부에 오류가 발생하였습니다.";
 		return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR, message);
 	}

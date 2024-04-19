@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -23,17 +20,14 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "TodoList", description = "투두리스트 관련 Api")
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/todolist")
 @RestController
 public class TodoController {
 
 	private final TodoService todoService;
-	private final ObjectMapper objectMapper;
 
 	@Operation(summary = "할 일 저장", description = "할 일을 투두리스트에 추가")
 	@Parameters({
@@ -71,10 +65,7 @@ public class TodoController {
 		@Parameter(name = "completed", description = "체크여부", example = "true")
 	})
 	@PutMapping("{id}")
-	public Todo update(@PathVariable Long id, @RequestBody String todo) throws JsonProcessingException {
-		Todo updateParam = objectMapper.readValue(todo, Todo.class);
-		log.info("updateParam={}", updateParam);
-
+	public Todo update(@PathVariable Long id, @RequestBody Todo updateParam) {
 		if (updateParam.getContent() == null && updateParam.getCompleted() == null) {
 			throw new IllegalArgumentException("내용 또는 완료여부 중 하나는 필수입니다.");
 		}

@@ -14,6 +14,13 @@ public class TodoService {
 	private final TodoRepository todoRepository;
 
 	public Todo save(Todo todo) {
+		if (todo.getCompleted() == null) {
+			todo = Todo.builder()
+				.content(todo.getContent())
+				.completed(false)
+				.category(todo.getCategory())
+				.build();
+		}
 		return todoRepository.save(todo);
 	}
 
@@ -27,7 +34,7 @@ public class TodoService {
 
 	public Todo update(Long id, Todo updateParam) {
 		Todo findTodo = findById(id);
-		boolean completed = updateParam.getCompleted() != null && updateParam.getCompleted();
+		boolean completed = updateParam.getCompleted() == null ? findTodo.getCompleted() : updateParam.getCompleted();
 		findTodo.update(findTodo.getContent(), completed);
 		todoRepository.update(id, findTodo);
 		return findTodo;
@@ -35,7 +42,7 @@ public class TodoService {
 
 	public Todo updateAll(Long id, Todo updateParam) {
 		Todo findTodo = findById(id);
-		boolean completed = updateParam.getCompleted() != null && updateParam.getCompleted();
+		boolean completed = updateParam.getCompleted() == null ? findTodo.getCompleted() : updateParam.getCompleted();
 		findTodo.update(updateParam.getContent(), completed);
 		todoRepository.update(id, findTodo);
 		return findTodo;
