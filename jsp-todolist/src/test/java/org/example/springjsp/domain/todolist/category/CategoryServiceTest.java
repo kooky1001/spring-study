@@ -28,8 +28,12 @@ class CategoryServiceTest {
 
 		//then
 		assertThat(categoryList).hasSizeGreaterThanOrEqualTo(1);
-		assertThat(categoryList).filteredOn(c -> c.getId().equals(save.getId()))
+		// assertThat(categoryList).filteredOn(c -> c.getId().equals(save.getId()))
+		// 	.extracting(Category::getId, Category::getName)
+		// 	.contains(tuple(save.getId(), save.getName()));
+		assertThat(categoryList)
 			.extracting(Category::getId, Category::getName)
+			// .containsExactly(tuple(save.getId(), save.getName()));
 			.contains(tuple(save.getId(), save.getName()));
 		// assertThat(categories).contains(category);
 	}
