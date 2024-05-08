@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.example.springjsp.domain.board.repository.BoardRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,14 +22,17 @@ public class BoardService {
 		return boardRepository.findById(id).orElse(null);
 	}
 
+	@Transactional
 	public Board save(Board board) {
 		return boardRepository.save(board);
 	}
 
+	@Transactional
 	public Board update(Long id, Board updateParam) {
 		return boardRepository.update(id, updateParam);
 	}
 
+	@Transactional
 	public Long delete(Long id) {
 		boardRepository.findById(id).map(boardRepository::delete).orElseThrow(IllegalArgumentException::new);
 		//        boardRepository.delete(id);

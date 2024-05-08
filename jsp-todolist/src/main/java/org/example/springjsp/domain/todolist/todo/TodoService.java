@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.example.springjsp.domain.todolist.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +14,7 @@ public class TodoService {
 
 	private final TodoRepository todoRepository;
 
+	@Transactional
 	public Todo save(Todo todo) {
 		if (todo.getCompleted() == null) {
 			todo = Todo.builder()
@@ -32,6 +34,7 @@ public class TodoService {
 		return todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 할 일이 없습니다. id: " + id));
 	}
 
+	@Transactional
 	public Todo update(Long id, Todo updateParam) {
 		Todo findTodo = findById(id);
 		String content =
@@ -51,6 +54,7 @@ public class TodoService {
 	// 	return findTodo;
 	// }
 
+	@Transactional
 	public Long delete(Todo todo) {
 		return todoRepository.delete(todo);
 	}
