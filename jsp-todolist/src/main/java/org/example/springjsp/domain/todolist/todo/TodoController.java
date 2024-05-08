@@ -70,11 +70,12 @@ public class TodoController {
 			throw new IllegalArgumentException("내용 또는 완료여부 중 하나는 필수입니다.");
 		}
 
-		if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
-			return todoService.update(id, updateParam);
-		} else {
-			return todoService.updateAll(id, updateParam);
-		}
+		return todoService.update(id, updateParam);
+		// if (updateParam.getContent() == null || updateParam.getContent().isBlank()) {
+		// 	return todoService.update(id, updateParam);
+		// } else {
+		// 	return todoService.updateAll(id, updateParam);
+		// }
 	}
 
 	@Operation(summary = "할 일 삭제", description = "할 일을 리스트에서 삭제")

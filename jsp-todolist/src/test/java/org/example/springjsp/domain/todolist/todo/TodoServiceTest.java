@@ -79,7 +79,8 @@ class TodoServiceTest {
 		Todo updateParam = Todo.builder().content("테스트")
 			.completed(true)
 			.build();
-		Todo update = todoService.updateAll(todo.getId(), updateParam);
+		// Todo update = todoService.updateAll(todo.getId(), updateParam);
+		Todo update = todoService.update(todo.getId(), updateParam);
 
 		assertThat(update.getId()).isEqualTo(todo.getId());
 		assertThat(update.getContent()).isEqualTo(updateParam.getContent());

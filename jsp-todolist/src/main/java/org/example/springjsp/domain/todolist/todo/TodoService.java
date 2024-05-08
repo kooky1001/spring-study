@@ -34,19 +34,22 @@ public class TodoService {
 
 	public Todo update(Long id, Todo updateParam) {
 		Todo findTodo = findById(id);
+		String content =
+			((updateParam.getContent() == null) || updateParam.getContent().isBlank()) ? findTodo.getContent() :
+				updateParam.getContent();
 		boolean completed = updateParam.getCompleted() == null ? findTodo.getCompleted() : updateParam.getCompleted();
-		findTodo.update(findTodo.getContent(), completed);
+		findTodo.update(content, completed);
 		todoRepository.update(id, findTodo);
 		return findTodo;
 	}
 
-	public Todo updateAll(Long id, Todo updateParam) {
-		Todo findTodo = findById(id);
-		boolean completed = updateParam.getCompleted() == null ? findTodo.getCompleted() : updateParam.getCompleted();
-		findTodo.update(updateParam.getContent(), completed);
-		todoRepository.update(id, findTodo);
-		return findTodo;
-	}
+	// public Todo updateAll(Long id, Todo updateParam) {
+	// 	Todo findTodo = findById(id);
+	// 	boolean completed = updateParam.getCompleted() == null ? findTodo.getCompleted() : updateParam.getCompleted();
+	// 	findTodo.update(updateParam.getContent(), completed);
+	// 	todoRepository.update(id, findTodo);
+	// 	return findTodo;
+	// }
 
 	public Long delete(Todo todo) {
 		return todoRepository.delete(todo);
